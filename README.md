@@ -1,7 +1,7 @@
 # LearningByDoing
 Different projects and tasks to learn by doing bioinformatics and related topics. Resources from online tutorials and teachers
 
-1. ComplexHeatmap
+1. ## ComplexHeatmap
       #### Take home message
           1. Color mapping is critical
           2. Scaling is critical
