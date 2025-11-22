@@ -3,7 +3,7 @@ ComplexHeatmap
 Jaakko
 2025-11-19
 
-- [R Markdown](#r-markdown)
+  - [R Markdown](#r-markdown)
   - [First time setup](#first-time-setup)
   - [Load the library](#load-the-library)
   - [Make dummy data](#make-dummy-data)
@@ -15,7 +15,7 @@ Jaakko
   - [Understanding clustering?](#understanding-clustering)
   - [Take home message](#take-home-message)
 
-## R Markdown
+### R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax
 for authoring HTML, PDF, and MS Word documents. For more details on
