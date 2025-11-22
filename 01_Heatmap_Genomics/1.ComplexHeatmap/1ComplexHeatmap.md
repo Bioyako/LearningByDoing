@@ -24,6 +24,7 @@ using R Markdown see <http://rmarkdown.rstudio.com>.
 ### First time setup
 
 ``` undefined
+{R environment}
 install.packages("BiocManager")
 BiocManager::install(version = "3.16")
 BiocManager::install("ComplexHeatmap")
