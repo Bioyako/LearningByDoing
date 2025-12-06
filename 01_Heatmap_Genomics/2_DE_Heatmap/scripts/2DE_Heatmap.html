@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jaakko">
+<meta name="dcterms.date" content="2025-11-20">
+
+<title>2DE_Heatmap</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7ac2f9da8c2617a4fdd15004b4601015.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-71e68a2f17e43fcc802603aabc22b63f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../01_Heatmap_Genomics/2_DE_Heatmap/scripts/2DE_Heatmap.html">2 DE Heatmap</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">LearningByDoing</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">1 Complex Heatmap</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">2 DE Heatmap</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">2DE_Heatmap</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jaakko </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- TOGGLE BUTTON -->
+<button id="theme-toggle" onclick="toggleTheme()" style="
+ position: fixed;
+ top: 15px;
+ right: 15px;
+ z-index: 9999;
+ background: #232b3a;
+ color: #d4d4d4;
+ border: 1px solid #3d4758;
+ padding: 6px 12px;
+ border-radius: 6px;
+ cursor: pointer;
+ font-size: 0.8rem;
+">
+<p>🌙 Dark Mode</p>
+</button>
+<script>
+// --- Inizializzazione ---
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("quarto-theme");
+  if (saved === "light") setLight();
+  else setDark();
+});
+
+// --- Funzione principale ---
+function toggleTheme() {
+  const current = localStorage.getItem("quarto-theme");
+  if (current === "light") { setDark(); }
+  else { setLight(); }
+}
+
+// --- MODE DARK ---
+function setDark() {
+  document.documentElement.classList.add("dark-mode");
+  document.documentElement.classList.remove("light-mode");
+  localStorage.setItem("quarto-theme", "dark");
+
+  const btn = document.getElementById("theme-toggle");
+  btn.innerHTML = "🌙 Dark Mode";
+  btn.style.background = "#232b3a";
+  btn.style.color = "#d4d4d4";
+}
+
+// --- MODE LIGHT ---
+function setLight() {
+  document.documentElement.classList.add("light-mode");
+  document.documentElement.classList.remove("dark-mode");
+  localStorage.setItem("quarto-theme", "light");
+
+  const btn = document.getElementById("theme-toggle");
+  btn.innerHTML = "☀️ Light Mode";
+  btn.style.background = "#e8e8e8";
+  btn.style.color = "#1e2433";
+}
+</script>
+<div class="cell">
+<style type="text/css">
+/* --- 1. RESET GENERALE --- */
+body {
+background-color: #1e2433;
+color: #d4d4d4;
+}
+
+/* --- 2. CONTENITORE ESTERNO (IL BOX FISSO) --- */
+div.sourceCode {
+background: linear-gradient(90deg, #232b3a 0%, #232b3a 50px, #2d3648 50px, #2d3648 100%) !important;
+border: 1px solid #3d4758;
+border-radius: 6px;
+margin-bottom: 1em;
+position: relative;
+padding-top: 34px !important;
+}
+
+/* --- 3. CODICE SCORREVOLE (PRE) --- */
+div.sourceCode pre {
+background-color: transparent !important;
+border: none !important;
+}
+
+/* --- 4. NUMERI DI RIGA --- */
+div.sourceCode pre code a,
+div.sourceCode pre code span.a,
+div.sourceCode .linenos {
+color: #636d83 !important;
+text-decoration: none;
+opacity: 1 !important;
+}
+
+/* --- 5. ETICHETTA LINGUAGGIO (HEADER) --- */
+div.sourceCode::before {
+content: "CODE";
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 34px;
+background-color: #232b3a;
+border-bottom: 1px solid #3d4758;
+color: #7d899c;
+display: flex;
+align-items: center;
+padding-left: 12px;
+font-family: sans-serif;
+font-size: 0.75rem;
+font-weight: bold;
+text-transform: uppercase;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+z-index: 10;
+}
+
+/* --- 5b. Riconoscimento linguaggio --- */
+div.sourceCode:has(.r),
+div.sourceCode:has(.language-r) { }
+div.sourceCode:has(.r)::before,
+div.sourceCode:has(.language-r)::before { content: "R"; }
+
+div.sourceCode:has(.bash),
+div.sourceCode:has(.language-bash) { }
+div.sourceCode:has(.bash)::before,
+div.sourceCode:has(.language-bash)::before { content: "BASH"; }
+
+div.sourceCode:has(.python),
+div.sourceCode:has(.language-python) { }
+div.sourceCode:has(.python)::before,
+div.sourceCode:has(.language-python)::before { content: "PYTHON"; }
+
+div.sourceCode:has(.css),
+div.sourceCode:has(.language-css) { }
+div.sourceCode:has(.css)::before,
+div.sourceCode:has(.language-css)::before { content: "CSS"; }
+
+div.sourceCode:has(.json),
+div.sourceCode:has(.language-json) { }
+div.sourceCode:has(.json)::before,
+div.sourceCode:has(.language-json)::before { content: "JSON"; }
+
+/* --- 6. OUTPUT (RISULTATI ARANCIONI) --- */
+div.cell-output-stdout pre,
+div.cell-output-stderr pre {
+background-color: #2d3648 !important;
+border: 1px solid #3d4758;
+border-radius: 6px;
+padding: 0.8em 1em !important;
+}
+
+div.cell-output-stdout pre, div.cell-output-stdout pre code,
+div.cell-output-stderr pre, div.cell-output-stderr pre code {
+color: #ff8866 !important;
+}
+
+/* --- 7. BOTTONE COPIA --- */
+.code-copy-button {
+position: absolute !important;
+top: 6px !important;
+right: 6px !important;
+z-index: 100 !important;
+background-color: #3d4758 !important;
+color: #d4d4d4 !important;
+border: 1px solid #4d5768 !important;
+}
+
+.code-copy-button:hover {
+background-color: #4d5768 !important;
+}
+
+/* --- 8. DARK MODE - syntax highlighting --- */
+:root.dark-mode .sourceCode .kw { color: #ff79c6 !important; } /* keywords - rosa */
+:root.dark-mode .sourceCode .dt { color: #8be9fd !important; } /* data types - cyan */
+:root.dark-mode .sourceCode .dv { color: #bd93f9 !important; } /* numeri - viola */
+:root.dark-mode .sourceCode .st { color: #f1fa8c !important; } /* stringhe - giallo */
+:root.dark-mode .sourceCode .co { color: #6272a4 !important; } /* commenti - grigio blu */
+:root.dark-mode .sourceCode .fu { color: #50fa7b !important; } /* funzioni - verde */
+:root.dark-mode .sourceCode .op { color: #ff79c6 !important; } /* operatori - rosa */
+:root.dark-mode .sourceCode .va { color: #f8f8f2 !important; } /* variabili - bianco */
+:root.dark-mode .sourceCode .at { color: #50fa7b !important; } /* attributi - verde */
+:root.dark-mode .sourceCode .ss { color: #f1fa8c !important; } /* special strings - giallo */
+
+/* ============================ */
+/*     LIGHT MODE OVERRIDES     */
+/* ============================ */
+
+:root.light-mode body {
+background-color: #e8eef5 !important;
+color: #2c3e50 !important;
+}
+
+/* Box codice: sfondo chiaro + colonna numeri chiara */
+:root.light-mode div.sourceCode {
+background: linear-gradient(
+90deg,
+#d7d7e0 0%, #d7d7e0 50px,
+#ffffff 50px, #ffffff 100%
+) !important;
+border-color: #bfc6d1 !important;
+}
+
+/* FORZA TUTTO IL TESTO NEL CODICE A ESSERE SCURO */
+:root.light-mode div.sourceCode pre *,
+:root.light-mode div.sourceCode pre code *,
+:root.light-mode div.sourceCode span,
+:root.light-mode div.sourceCode code span {
+color: #383a42 !important;
+}
+
+/* numeri di riga */
+:root.light-mode .linenos,
+:root.light-mode div.sourceCode pre code a {
+color: #6b7280 !important;
+}
+
+/* header del linguaggio */
+:root.light-mode div.sourceCode::before {
+background-color: #d7d7e0 !important;
+color: #555 !important;
+border-bottom: 1px solid #bfc6d1 !important;
+}
+
+/* output */
+:root.light-mode div.cell-output-stdout pre,
+:root.light-mode div.cell-output-stderr pre {
+background-color: #ffffff !important;
+border: 1px solid #bfc6d1 !important;
+}
+
+:root.light-mode div.cell-output-stdout pre code,
+:root.light-mode div.cell-output-stderr pre code {
+color: #a83200 !important;
+}
+
+/* bottone copia */
+:root.light-mode .code-copy-button {
+background-color: #d7d7e0 !important;
+color: #383a42 !important;
+border: 1px solid #bfc6d1 !important;
+}
+
+:root.light-mode .code-copy-button:hover {
+background-color: #c7c7d0 !important;
+}
+
+/* LIGHT MODE - syntax highlighting personalizzato */
+:root.light-mode .sourceCode .kw { color: #a626a4 !important; } /* keywords - viola */
+:root.light-mode .sourceCode .dt { color: #0184bc !important; } /* data types - blu */
+:root.light-mode .sourceCode .dv { color: #986801 !important; } /* numeri - arancione */
+:root.light-mode .sourceCode .st { color: #50a14f !important; } /* stringhe - verde */
+:root.light-mode .sourceCode .co { color: #a0a1a7 !important; } /* commenti - grigio */
+:root.light-mode .sourceCode .fu { color: #4078f2 !important; } /* funzioni - blu */
+:root.light-mode .sourceCode .op { color: #383a42 !important; } /* operatori - nero */
+:root.light-mode .sourceCode .va { color: #383a42 !important; } /* variabili - nero */
+:root.light-mode .sourceCode .at { color: #4078f2 !important; } /* attributi - blu */
+:root.light-mode .sourceCode .ss { color: #50a14f !important; } /* special strings - verde */
+:root.light-mode .sourceCode .sc { color: #383a42 !important; } /* special char - nero */
+:root.light-mode .sourceCode .bn { color: #986801 !important; } /* base n - arancione */
+:root.light-mode .sourceCode .fl { color: #986801 !important; } /* float - arancione */
+:root.light-mode .sourceCode .ch { color: #50a14f !important; } /* char - verde */
+:root.light-mode .sourceCode .cn { color: #383a42 !important; } /* constant - nero */
+</style>
+</div>
+<section id="quarto" class="level2">
+<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
+<p>This is a Quarto document. Quarto is a multi-language, next-generation version of R Markdown. Check the <a href="https://quarto.org/docs/get-started/hello/rstudio.html">tutorial</a>.<br>
+N.B. - Learn the IT foundations to master bioinformatics tools and softwares, and prevent getting tangled on the infamous “dependency hell”. Ask for the “Foundations of Bioinformatics Infrastructure”.</p>
+</section>
+<section id="create-and-activate-the-environment-bioinfo" class="level2">
+<h2 class="anchored" data-anchor-id="create-and-activate-the-environment-bioinfo">Create and activate the environment “bioinfo”</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> bioinfo python=3.11</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">mamba</span> activate bioinfo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="download-the-rna-seq-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="download-the-rna-seq-dataset">Download the RNA-seq dataset</h2>
+<p>Let’s use a real example - <u><em>RNA-seq of ITPR3 and RELB knockout in SW480 under normoxia and hypoxia</em></u> (<em>Homo sapiens</em>) <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197576" class="uri">https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197576</a>.</p>
+<p><img src="images/IM1.png" class="img-fluid"></p>
+<p>N.B. - Structure properly your folder (‘mkdir folder’):<br>
+</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>.
+├── data/
+├── scripts/
+└── results/</code></pre>
+</div>
+</div>
+<p>How to download the files from FTP with UNIX terminal: <a href="https://www.ncbi.nlm.nih.gov/geo/info/download.html" class="uri">https://www.ncbi.nlm.nih.gov/geo/info/download.html</a><br>
+<a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/" class="uri">https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/</a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Move to /data folder !!!</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">cd</span> data</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">wget</span> https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/GSE197576_raw_gene_counts_matrix.tsv.gz</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Alternative use GEOquery <a href="https://bioconductor.org/packages/release/bioc/html/GEOquery.html" class="uri">https://bioconductor.org/packages/release/bioc/html/GEOquery.html</a>.</p>
+</section>
+<section id="check-the-data-ad-extract-the-samples-of-interest" class="level2">
+<h2 class="anchored" data-anchor-id="check-the-data-ad-extract-the-samples-of-interest">Check the data ad extract the samples of interest</h2>
+<p>Check the data in the compressed RNA-seq file.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">zless</span> <span class="at">-S</span> GSE197576_raw_gene_counts_matrix.tsv.gz</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># z because is compressed</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># less is the faster command to view the conte of a file</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># -S maintain one raw column</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># press q to quit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Install csvtk annd check the data in a pretty aligned manner.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda csvtk</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">csvtk</span> pretty <span class="at">-t</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># -t tab the limit</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># press q to quit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="ex">csvtk</span> headers <span class="at">-t</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>gene
+01_SW_sgCTRL_Norm
+02_SW_sgCTRL_Norm
+03_SW_sgITPR3_1_Norm
+04_SW_sgITPR3_1_Norm
+07_SW_sgRELB_3_Norm
+08_SW_sgRELB_3_Norm
+11_SW_sgCTRL_Hyp
+12_SW_sgCTRL_Hyp
+13_SW_sgITPR3_1_Hyp
+14_SW_sgITPR3_1_Hyp
+17_SW_sgRELB_3_Hyp
+18_SW_sgRELB_3_Hyp</code></pre>
+</div>
+</div>
+<p>N.B - Get csvtk at <a href="https://github.com/shenwei356/csvtk" class="uri">https://github.com/shenwei356/csvtk</a></p>
+<p>Extract the gene expression values from:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>01_SW_sgCTRL_Norm</em></td>
+<td><em>02_SW_sgCTRL_Norm</em></td>
+<td><em>17_SW_sgRELB_3_Hyp</em></td>
+<td><em>18_SW_sgRELB_3_Hyp</em></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="ex">csvtk</span> cut <span class="at">-t</span> <span class="at">-f1,2,3,12,13</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="kw">|</span> <span class="ex">column</span> <span class="at">-t</span> <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>gene                       01_SW_sgCTRL_Norm  02_SW_sgCTRL_Norm  17_SW_sgRELB_3_Hyp  18_SW_sgRELB_3_Hyp
+DDX11L1                    0                  0                  0                   0
+WASH7P                     18                 11                 30                  25
+MIR6859-1                  5                  1                  8                   5
+MIR1302-2HG                0                  0                  0                   0
+MIR1302-2                  0                  0                  0                   0
+FAM138A                    0                  0                  0                   0
+OR4F5                      0                  0                  0                   0
+LOC100996442               9                  3                  15                  20
+LOC729737                  3                  3                  33                  45</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">csvtk</span> cut <span class="at">-t</span> <span class="at">-f1,1,2,12,13</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="op">&gt;</span> raw.counts.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Your <em>/data</em> folder now contains:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>data/
+├── GSE197576_raw_gene_counts_matrix.tsv.gz
+└── raw.counts.tsv</code></pre>
+</div>
+</div>
+</section>
+<section id="read-the-data-into-r-and-make-a-deseq2-object" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-data-into-r-and-make-a-deseq2-object">Read the data into R and make a DESeq2 object</h2>
+<p>Follow the tutorial <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html" class="uri">http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html</a>.</p>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>Install the R-packages for this project within the ‘bioinfo’ virtual environment.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-tidyverse</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-dplyr</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-here</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-deseq2</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="ex">mamba</span> intall <span class="at">-c</span> conda-forge r-ggplot2</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-ggrepel</span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager   </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Save the environment for reproducibility.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">mamba</span> env export <span class="at">--no-builds</span> <span class="op">&gt;</span> bioinfo_environment.yml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Open RStudio from the terminal: you are now working with the R software within ‘bioinfo’ and you can find the packages previously installed.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">open</span> <span class="at">-na</span> RStudio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lets-start" class="level3">
+<h3 class="anchored" data-anchor-id="lets-start">Let’s start</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(dplyr) <span class="co">#https://dplyr.tidyverse.org/</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">library</span>(readr) <span class="co">#https://readr.tidyverse.org/</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">library</span>(here) <span class="co">#https://cran.r-project.org/web/packages/here/vignettes/here.html</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">library</span>(DESeq2) <span class="co">#https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ComplexHeatmap"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">here</span>(<span class="st">"01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv"</span>)) <span class="co">#import the dataset</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a></span>
+<span id="cb16-12"><a href="#cb16-12"></a>raw_counts_mat <span class="ot">&lt;-</span> raw_counts[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> as.matrix <span class="co">#create the values matrix removing the first column for DESeq2</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="fu">head</span>(raw_counts_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     01_SW_sgCTRL_Norm 02_SW_sgCTRL_Norm 17_SW_sgRELB_3_Hyp 18_SW_sgRELB_3_Hyp
+[1,]                 0                 0                  0                  0
+[2,]                18                11                 30                 25
+[3,]                 5                 1                  8                  5
+[4,]                 0                 0                  0                  0
+[5,]                 0                 0                  0                  0
+[6,]                 0                 0                  0                  0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">rownames</span>(raw_counts_mat) <span class="ot">&lt;-</span> raw_counts<span class="sc">$</span>gene <span class="co">#add row names to the matrix</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">head</span>(raw_counts_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            01_SW_sgCTRL_Norm 02_SW_sgCTRL_Norm 17_SW_sgRELB_3_Hyp
+DDX11L1                     0                 0                  0
+WASH7P                     18                11                 30
+MIR6859-1                   5                 1                  8
+MIR1302-2HG                 0                 0                  0
+MIR1302-2                   0                 0                  0
+FAM138A                     0                 0                  0
+            18_SW_sgRELB_3_Hyp
+DDX11L1                      0
+WASH7P                      25
+MIR6859-1                    5
+MIR1302-2HG                  0
+MIR1302-2                    0
+FAM138A                      0</code></pre>
+</div>
+</div>
+<p>Make a dataframe for the metadata.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>metaframe <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">condition =</span> <span class="fu">c</span> (<span class="st">"normoxia"</span>, <span class="st">"normoxia"</span>, <span class="st">"hypoxia"</span>, <span class="st">"hypoxia"</span>))</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">rownames</span>(metaframe) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(raw_counts_mat)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>metaframe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  condition
+* &lt;chr&gt;    
+1 normoxia 
+2 normoxia 
+3 hypoxia  
+4 hypoxia  </code></pre>
+</div>
+</div>
+<p>Make a DESeq2 object (<a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">tutorial</a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">all</span>(<span class="fu">rownames</span>(metaframe) <span class="sc">==</span> <span class="fu">colnames</span>(raw_counts_mat)) <span class="co">#check</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData =</span> raw_counts_mat, <span class="co">#input object with design</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>                              <span class="at">colData =</span> metaframe,</span>
+<span id="cb24-3"><a href="#cb24-3"></a>                              <span class="at">design =</span> <span class="sc">~</span> condition)</span>
+<span id="cb24-4"><a href="#cb24-4"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds) <span class="co">#DE analysis</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a></span>
+<span id="cb24-6"><a href="#cb24-6"></a>?results</span>
+<span id="cb24-7"><a href="#cb24-7"></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"hypoxia"</span>, <span class="st">"normoxia"</span>)) <span class="co">#extract results from the analysis </span></span>
+<span id="cb24-8"><a href="#cb24-8"></a></span>
+<span id="cb24-9"><a href="#cb24-9"></a>res <span class="sc">%&gt;%</span> </span>
+<span id="cb24-10"><a href="#cb24-10"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>  <span class="fu">arrange</span>(padj <span class="sc">&lt;=</span> <span class="fl">0.1</span>, <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co">#filter significant and substantial expression changes </span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               baseMean log2FoldChange     lfcSE       stat    pvalue      padj
+WASH7P        19.868995     0.41727500 0.5998607  0.6956198 0.4866669 0.6105208
+MIR6859-1      4.356427     0.65513668 1.3035290  0.5025870 0.6152547 0.7232638
+LOC100996442  10.646734     1.06292492 0.8520192  1.2475363 0.2122009 0.3229198
+WASH9P        50.042666     0.04451088 0.3788408  0.1174923 0.9064699 0.9408732
+LINC01409     12.417663     0.80294905 0.7708893  1.0415880 0.2976028 0.4204900
+FAM87B         2.852901    -0.33928196 1.5932534 -0.2129492 0.8313666 0.8900030
+LINC00115     24.063112    -0.30645340 0.5400642 -0.5674389 0.5704160 0.6854688
+LOC100288175 162.124769     0.20237040 0.2175051  0.9304167 0.3521554 0.4798503
+LOC105378948  39.581280     0.61997436 0.4277432  1.4494080 0.1472237 0.2390383
+RNF223         9.592991    -0.79713059 0.8827150 -0.9030442 0.3665025 0.4942234</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>significant_genes <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="co">#identify the respective genes</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;=</span> <span class="fl">0.1</span>, <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">rownames</span>()</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a>significant_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "LOC729737"    "LINC02593"    "LOC107985728" "LOC107985376" "LINC02781"   
+ [6] "LINC01714"    "C1orf167"     "NPPB"         "PADI2"        "PLA2G5"      </code></pre>
+</div>
+</div>
+</section>
+<section id="pca-analysis-to-verify-your-results" class="level3">
+<h3 class="anchored" data-anchor-id="pca-analysis-to-verify-your-results">PCA Analysis to verify your results</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>vsd <span class="ot">&lt;-</span> <span class="fu">vst</span>(dds, <span class="at">blind =</span> F) <span class="co">#normalization applying a variance stabilizing transformation (VST)</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>p <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd, <span class="at">intgroup =</span> <span class="fu">c</span>(<span class="st">"condition"</span>))</span>
+<span id="cb28-4"><a href="#cb28-4"></a>p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2DE_Heatmap_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can make a PCA by yourself.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># vsd &lt;- vst(dds, blind = F)</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">head</span>(<span class="fu">assay</span>(vsd), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          01_SW_sgCTRL_Norm 02_SW_sgCTRL_Norm 17_SW_sgRELB_3_Hyp
+DDX11L1            10.31070          10.31070           10.31070
+WASH7P             10.48764          10.46633           10.51233
+MIR6859-1          10.40400          10.35764           10.41488
+          18_SW_sgRELB_3_Hyp
+DDX11L1             10.31070
+WASH7P              10.49477
+MIR6859-1           10.39306</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>?assay</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>normalized_vsd <span class="ot">&lt;-</span> <span class="fu">assay</span>(vsd) <span class="sc">%&gt;%</span> <span class="co">#from DeSeq object to matrix</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a> <span class="fu">as.matrix</span>()</span>
+<span id="cb31-5"><a href="#cb31-5"></a></span>
+<span id="cb31-6"><a href="#cb31-6"></a>pca_prcomp <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(normalized_vsd), <span class="at">center =</span> T, <span class="at">scale. =</span> F) <span class="co">#PCA analysis</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a><span class="fu">names</span>(pca_prcomp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sdev"     "rotation" "center"   "scale"    "x"       </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>pca_prcomp<span class="sc">$</span>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         PC1       PC2       PC3           PC4
+01_SW_sgCTRL_Norm  -15.07327  2.234704 -1.602628  9.567716e-14
+02_SW_sgCTRL_Norm  -14.90781 -2.238765  1.619684 -4.871971e-15
+17_SW_sgRELB_3_Hyp  14.92560 -1.909982 -1.893329  1.475209e-14
+18_SW_sgRELB_3_Hyp  15.05548  1.914043  1.876273  1.168549e-13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>PC1_PC2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="at">PC1 =</span> pca_prcomp<span class="sc">$</span>x[,<span class="dv">1</span>],</span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="at">PC2 =</span> pca_prcomp<span class="sc">$</span>x[,<span class="dv">2</span>],</span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="at">type =</span> <span class="fu">rownames</span>(pca_prcomp<span class="sc">$</span>x)</span>
+<span id="cb35-5"><a href="#cb35-5"></a>)</span>
+<span id="cb35-6"><a href="#cb35-6"></a></span>
+<span id="cb35-7"><a href="#cb35-7"></a>var_explained <span class="ot">&lt;-</span> (pca_prcomp<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(pca_prcomp<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb35-8"><a href="#cb35-8"></a>pc1_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(var_explained[<span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb35-9"><a href="#cb35-9"></a>pc2_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(var_explained[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="fu">ggplot</span>(PC1_PC2, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> type)) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb35-14"><a href="#cb35-14"></a>    <span class="fu">aes</span>(<span class="at">label =</span> type),</span>
+<span id="cb35-15"><a href="#cb35-15"></a>    <span class="at">box.padding =</span> <span class="fl">0.5</span>,</span>
+<span id="cb35-16"><a href="#cb35-16"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>,</span>
+<span id="cb35-17"><a href="#cb35-17"></a>    <span class="at">segment.size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb35-18"><a href="#cb35-18"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span></span>
+<span id="cb35-19"><a href="#cb35-19"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-20"><a href="#cb35-20"></a>  </span>
+<span id="cb35-21"><a href="#cb35-21"></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-22"><a href="#cb35-22"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, pc1_percent, <span class="st">"% variance)"</span>),</span>
+<span id="cb35-23"><a href="#cb35-23"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, pc2_percent, <span class="st">"% variance)"</span>)</span>
+<span id="cb35-24"><a href="#cb35-24"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-25"><a href="#cb35-25"></a>  </span>
+<span id="cb35-26"><a href="#cb35-26"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span> </span>
+<span id="cb35-27"><a href="#cb35-27"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb35-28"><a href="#cb35-28"></a>  <span class="fu">theme</span>(</span>
+<span id="cb35-29"><a href="#cb35-29"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>),  </span>
+<span id="cb35-30"><a href="#cb35-30"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb35-31"><a href="#cb35-31"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2DE_Heatmap_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It is not exactly the same, what’s going on?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>?plotPCA <span class="co">#using the top 500 most variable genes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="make-a-perfect-heatmap" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-perfect-heatmap">Make a perfect heatmap</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>significant_mat <span class="ot">&lt;-</span> normalized_vsd[significant_genes, ]</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">dim</span>(significant_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 967   4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(significant_mat))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2DE_Heatmap_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You get this perfect looking heatmap because you select the genes that are different. So, no surprise at all!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>metaframe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  condition
+* &lt;chr&gt;    
+1 normoxia 
+2 normoxia 
+3 hypoxia  
+4 hypoxia  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>meta_annot <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">df =</span> metaframe,</span>
+<span id="cb42-2"><a href="#cb42-2"></a>                                <span class="at">col =</span> <span class="fu">list</span>(<span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"hypoxia"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"normoxia"</span> <span class="ot">=</span> <span class="st">"blue"</span>)))</span>
+<span id="cb42-3"><a href="#cb42-3"></a></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(significant_mat))),</span>
+<span id="cb42-5"><a href="#cb42-5"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>        <span class="at">show_row_names =</span> F,</span>
+<span id="cb42-7"><a href="#cb42-7"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2DE_Heatmap_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>why scaling is important?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">Heatmap</span>(significant_mat, </span>
+<span id="cb43-2"><a href="#cb43-2"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
+<span id="cb43-3"><a href="#cb43-3"></a>        <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb43-4"><a href="#cb43-4"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2DE_Heatmap_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/Bioyako\.github\.io\/LearningByDoing\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">---</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="an">title:</span><span class="co"> "2DE_Heatmap"</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="an">author:</span><span class="co"> "Jaakko"</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="an">date:</span><span class="co"> "2025-11-20"</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="co">  html:</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="co">    code-copy: true </span></span>
+<span id="cb44-8"><a href="#cb44-8"></a><span class="co">    code-line-numbers: true</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="co">    code-overflow: scroll</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a><span class="co">    code-tools: true</span></span>
+<span id="cb44-11"><a href="#cb44-11"></a><span class="co">    highlight-style: github-dark</span></span>
+<span id="cb44-12"><a href="#cb44-12"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb44-13"><a href="#cb44-13"></a><span class="an">execute:</span></span>
+<span id="cb44-14"><a href="#cb44-14"></a><span class="co">  echo: true</span></span>
+<span id="cb44-15"><a href="#cb44-15"></a><span class="co">  eval: true</span></span>
+<span id="cb44-16"><a href="#cb44-16"></a><span class="an">conda:</span></span>
+<span id="cb44-17"><a href="#cb44-17"></a><span class="co">  environment: bioinfo #bioinfo_environment.yml</span></span>
+<span id="cb44-18"><a href="#cb44-18"></a><span class="co">---</span></span>
+<span id="cb44-19"><a href="#cb44-19"></a></span>
+<span id="cb44-20"><a href="#cb44-20"></a><span class="co">&lt;!-- TOGGLE BUTTON --&gt;</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a></span>
+<span id="cb44-22"><a href="#cb44-22"></a><span class="in">```{=html}</span></span>
+<span id="cb44-23"><a href="#cb44-23"></a><span class="in">&lt;button id="theme-toggle" onclick="toggleTheme()" style="</span></span>
+<span id="cb44-24"><a href="#cb44-24"></a><span class="in"> position: fixed;</span></span>
+<span id="cb44-25"><a href="#cb44-25"></a><span class="in"> top: 15px;</span></span>
+<span id="cb44-26"><a href="#cb44-26"></a><span class="in"> right: 15px;</span></span>
+<span id="cb44-27"><a href="#cb44-27"></a><span class="in"> z-index: 9999;</span></span>
+<span id="cb44-28"><a href="#cb44-28"></a><span class="in"> background: #232b3a;</span></span>
+<span id="cb44-29"><a href="#cb44-29"></a><span class="in"> color: #d4d4d4;</span></span>
+<span id="cb44-30"><a href="#cb44-30"></a><span class="in"> border: 1px solid #3d4758;</span></span>
+<span id="cb44-31"><a href="#cb44-31"></a><span class="in"> padding: 6px 12px;</span></span>
+<span id="cb44-32"><a href="#cb44-32"></a><span class="in"> border-radius: 6px;</span></span>
+<span id="cb44-33"><a href="#cb44-33"></a><span class="in"> cursor: pointer;</span></span>
+<span id="cb44-34"><a href="#cb44-34"></a><span class="in"> font-size: 0.8rem;</span></span>
+<span id="cb44-35"><a href="#cb44-35"></a><span class="in">"&gt;</span></span>
+<span id="cb44-36"><a href="#cb44-36"></a><span class="in">```</span></span>
+<span id="cb44-37"><a href="#cb44-37"></a></span>
+<span id="cb44-38"><a href="#cb44-38"></a>🌙 Dark Mode</span>
+<span id="cb44-39"><a href="#cb44-39"></a></span>
+<span id="cb44-40"><a href="#cb44-40"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb44-41"><a href="#cb44-41"></a></span>
+<span id="cb44-42"><a href="#cb44-42"></a><span class="in">```{=html}</span></span>
+<span id="cb44-43"><a href="#cb44-43"></a><span class="in">&lt;script&gt;</span></span>
+<span id="cb44-44"><a href="#cb44-44"></a><span class="in">// --- Inizializzazione ---</span></span>
+<span id="cb44-45"><a href="#cb44-45"></a><span class="in">document.addEventListener("DOMContentLoaded", () =&gt; {</span></span>
+<span id="cb44-46"><a href="#cb44-46"></a><span class="in">  const saved = localStorage.getItem("quarto-theme");</span></span>
+<span id="cb44-47"><a href="#cb44-47"></a><span class="in">  if (saved === "light") setLight();</span></span>
+<span id="cb44-48"><a href="#cb44-48"></a><span class="in">  else setDark();</span></span>
+<span id="cb44-49"><a href="#cb44-49"></a><span class="in">});</span></span>
+<span id="cb44-50"><a href="#cb44-50"></a></span>
+<span id="cb44-51"><a href="#cb44-51"></a><span class="in">// --- Funzione principale ---</span></span>
+<span id="cb44-52"><a href="#cb44-52"></a><span class="in">function toggleTheme() {</span></span>
+<span id="cb44-53"><a href="#cb44-53"></a><span class="in">  const current = localStorage.getItem("quarto-theme");</span></span>
+<span id="cb44-54"><a href="#cb44-54"></a><span class="in">  if (current === "light") { setDark(); }</span></span>
+<span id="cb44-55"><a href="#cb44-55"></a><span class="in">  else { setLight(); }</span></span>
+<span id="cb44-56"><a href="#cb44-56"></a><span class="in">}</span></span>
+<span id="cb44-57"><a href="#cb44-57"></a></span>
+<span id="cb44-58"><a href="#cb44-58"></a><span class="in">// --- MODE DARK ---</span></span>
+<span id="cb44-59"><a href="#cb44-59"></a><span class="in">function setDark() {</span></span>
+<span id="cb44-60"><a href="#cb44-60"></a><span class="in">  document.documentElement.classList.add("dark-mode");</span></span>
+<span id="cb44-61"><a href="#cb44-61"></a><span class="in">  document.documentElement.classList.remove("light-mode");</span></span>
+<span id="cb44-62"><a href="#cb44-62"></a><span class="in">  localStorage.setItem("quarto-theme", "dark");</span></span>
+<span id="cb44-63"><a href="#cb44-63"></a></span>
+<span id="cb44-64"><a href="#cb44-64"></a><span class="in">  const btn = document.getElementById("theme-toggle");</span></span>
+<span id="cb44-65"><a href="#cb44-65"></a><span class="in">  btn.innerHTML = "🌙 Dark Mode";</span></span>
+<span id="cb44-66"><a href="#cb44-66"></a><span class="in">  btn.style.background = "#232b3a";</span></span>
+<span id="cb44-67"><a href="#cb44-67"></a><span class="in">  btn.style.color = "#d4d4d4";</span></span>
+<span id="cb44-68"><a href="#cb44-68"></a><span class="in">}</span></span>
+<span id="cb44-69"><a href="#cb44-69"></a></span>
+<span id="cb44-70"><a href="#cb44-70"></a><span class="in">// --- MODE LIGHT ---</span></span>
+<span id="cb44-71"><a href="#cb44-71"></a><span class="in">function setLight() {</span></span>
+<span id="cb44-72"><a href="#cb44-72"></a><span class="in">  document.documentElement.classList.add("light-mode");</span></span>
+<span id="cb44-73"><a href="#cb44-73"></a><span class="in">  document.documentElement.classList.remove("dark-mode");</span></span>
+<span id="cb44-74"><a href="#cb44-74"></a><span class="in">  localStorage.setItem("quarto-theme", "light");</span></span>
+<span id="cb44-75"><a href="#cb44-75"></a></span>
+<span id="cb44-76"><a href="#cb44-76"></a><span class="in">  const btn = document.getElementById("theme-toggle");</span></span>
+<span id="cb44-77"><a href="#cb44-77"></a><span class="in">  btn.innerHTML = "☀️ Light Mode";</span></span>
+<span id="cb44-78"><a href="#cb44-78"></a><span class="in">  btn.style.background = "#e8e8e8";</span></span>
+<span id="cb44-79"><a href="#cb44-79"></a><span class="in">  btn.style.color = "#1e2433";</span></span>
+<span id="cb44-80"><a href="#cb44-80"></a><span class="in">}</span></span>
+<span id="cb44-81"><a href="#cb44-81"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb44-82"><a href="#cb44-82"></a><span class="in">```</span></span>
+<span id="cb44-83"><a href="#cb44-83"></a></span>
+<span id="cb44-86"><a href="#cb44-86"></a><span class="in">```{css}</span></span>
+<span id="cb44-87"><a href="#cb44-87"></a>#<span class="op">|</span> echo<span class="op">:</span> <span class="kw">false</span></span>
+<span id="cb44-88"><a href="#cb44-88"></a></span>
+<span id="cb44-89"><a href="#cb44-89"></a><span class="co">/* --- 1. RESET GENERALE --- */</span></span>
+<span id="cb44-90"><a href="#cb44-90"></a>body <span class="op">{</span></span>
+<span id="cb44-91"><a href="#cb44-91"></a>background<span class="op">-</span>color<span class="op">:</span> #<span class="fl">1e2433</span><span class="op">;</span></span>
+<span id="cb44-92"><a href="#cb44-92"></a>color<span class="op">:</span> #d4d4d4<span class="op">;</span></span>
+<span id="cb44-93"><a href="#cb44-93"></a><span class="op">}</span></span>
+<span id="cb44-94"><a href="#cb44-94"></a></span>
+<span id="cb44-95"><a href="#cb44-95"></a><span class="co">/* --- 2. CONTENITORE ESTERNO (IL BOX FISSO) --- */</span></span>
+<span id="cb44-96"><a href="#cb44-96"></a>div<span class="op">.</span><span class="fu">sourceCode</span> <span class="op">{</span></span>
+<span id="cb44-97"><a href="#cb44-97"></a>background<span class="op">:</span> linear<span class="op">-</span><span class="fu">gradient</span><span class="op">(</span><span class="dv">90</span>deg<span class="op">,</span> #<span class="dv">232</span>b3a <span class="dv">0</span><span class="op">%,</span> #<span class="dv">232</span>b3a <span class="dv">50</span>px<span class="op">,</span> #<span class="dv">2</span>d3648 <span class="dv">50</span>px<span class="op">,</span> #<span class="dv">2</span>d3648 <span class="dv">100</span><span class="op">%)</span> <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-98"><a href="#cb44-98"></a>border<span class="op">:</span> <span class="dv">1</span>px solid #<span class="dv">3</span>d4758<span class="op">;</span></span>
+<span id="cb44-99"><a href="#cb44-99"></a>border<span class="op">-</span>radius<span class="op">:</span> <span class="dv">6</span>px<span class="op">;</span></span>
+<span id="cb44-100"><a href="#cb44-100"></a>margin<span class="op">-</span>bottom<span class="op">:</span> <span class="dv">1</span>em<span class="op">;</span></span>
+<span id="cb44-101"><a href="#cb44-101"></a>position<span class="op">:</span> relative<span class="op">;</span></span>
+<span id="cb44-102"><a href="#cb44-102"></a>padding<span class="op">-</span>top<span class="op">:</span> <span class="dv">34</span>px <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-103"><a href="#cb44-103"></a><span class="op">}</span></span>
+<span id="cb44-104"><a href="#cb44-104"></a></span>
+<span id="cb44-105"><a href="#cb44-105"></a><span class="co">/* --- 3. CODICE SCORREVOLE (PRE) --- */</span></span>
+<span id="cb44-106"><a href="#cb44-106"></a>div<span class="op">.</span><span class="fu">sourceCode</span> pre <span class="op">{</span></span>
+<span id="cb44-107"><a href="#cb44-107"></a>background<span class="op">-</span>color<span class="op">:</span> transparent <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-108"><a href="#cb44-108"></a>border<span class="op">:</span> none <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-109"><a href="#cb44-109"></a><span class="op">}</span></span>
+<span id="cb44-110"><a href="#cb44-110"></a></span>
+<span id="cb44-111"><a href="#cb44-111"></a><span class="co">/* --- 4. NUMERI DI RIGA --- */</span></span>
+<span id="cb44-112"><a href="#cb44-112"></a>div<span class="op">.</span><span class="fu">sourceCode</span> pre code a<span class="op">,</span></span>
+<span id="cb44-113"><a href="#cb44-113"></a>div<span class="op">.</span><span class="fu">sourceCode</span> pre code span<span class="op">.</span><span class="fu">a</span><span class="op">,</span></span>
+<span id="cb44-114"><a href="#cb44-114"></a>div<span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">linenos</span> <span class="op">{</span></span>
+<span id="cb44-115"><a href="#cb44-115"></a>color<span class="op">:</span> #<span class="dv">636</span>d83 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-116"><a href="#cb44-116"></a>text<span class="op">-</span>decoration<span class="op">:</span> none<span class="op">;</span></span>
+<span id="cb44-117"><a href="#cb44-117"></a>opacity<span class="op">:</span> <span class="dv">1</span> <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-118"><a href="#cb44-118"></a><span class="op">}</span></span>
+<span id="cb44-119"><a href="#cb44-119"></a></span>
+<span id="cb44-120"><a href="#cb44-120"></a><span class="co">/* --- 5. ETICHETTA LINGUAGGIO (HEADER) --- */</span></span>
+<span id="cb44-121"><a href="#cb44-121"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">::</span>before <span class="op">{</span></span>
+<span id="cb44-122"><a href="#cb44-122"></a>content<span class="op">:</span> <span class="st">"CODE"</span><span class="op">;</span></span>
+<span id="cb44-123"><a href="#cb44-123"></a>position<span class="op">:</span> absolute<span class="op">;</span></span>
+<span id="cb44-124"><a href="#cb44-124"></a>top<span class="op">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-125"><a href="#cb44-125"></a>left<span class="op">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-126"><a href="#cb44-126"></a>right<span class="op">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb44-127"><a href="#cb44-127"></a>height<span class="op">:</span> <span class="dv">34</span>px<span class="op">;</span></span>
+<span id="cb44-128"><a href="#cb44-128"></a>background<span class="op">-</span>color<span class="op">:</span> #<span class="dv">232</span>b3a<span class="op">;</span></span>
+<span id="cb44-129"><a href="#cb44-129"></a>border<span class="op">-</span>bottom<span class="op">:</span> <span class="dv">1</span>px solid #<span class="dv">3</span>d4758<span class="op">;</span></span>
+<span id="cb44-130"><a href="#cb44-130"></a>color<span class="op">:</span> #<span class="dv">7</span>d899c<span class="op">;</span></span>
+<span id="cb44-131"><a href="#cb44-131"></a>display<span class="op">:</span> flex<span class="op">;</span></span>
+<span id="cb44-132"><a href="#cb44-132"></a>align<span class="op">-</span>items<span class="op">:</span> center<span class="op">;</span></span>
+<span id="cb44-133"><a href="#cb44-133"></a>padding<span class="op">-</span>left<span class="op">:</span> <span class="dv">12</span>px<span class="op">;</span></span>
+<span id="cb44-134"><a href="#cb44-134"></a>font<span class="op">-</span>family<span class="op">:</span> sans<span class="op">-</span>serif<span class="op">;</span></span>
+<span id="cb44-135"><a href="#cb44-135"></a>font<span class="op">-</span>size<span class="op">:</span> <span class="fl">0.75</span>rem<span class="op">;</span></span>
+<span id="cb44-136"><a href="#cb44-136"></a>font<span class="op">-</span>weight<span class="op">:</span> bold<span class="op">;</span></span>
+<span id="cb44-137"><a href="#cb44-137"></a>text<span class="op">-</span>transform<span class="op">:</span> uppercase<span class="op">;</span></span>
+<span id="cb44-138"><a href="#cb44-138"></a>border<span class="op">-</span>top<span class="op">-</span>left<span class="op">-</span>radius<span class="op">:</span> <span class="dv">5</span>px<span class="op">;</span></span>
+<span id="cb44-139"><a href="#cb44-139"></a>border<span class="op">-</span>top<span class="op">-</span>right<span class="op">-</span>radius<span class="op">:</span> <span class="dv">5</span>px<span class="op">;</span></span>
+<span id="cb44-140"><a href="#cb44-140"></a>z<span class="op">-</span>index<span class="op">:</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb44-141"><a href="#cb44-141"></a><span class="op">}</span></span>
+<span id="cb44-142"><a href="#cb44-142"></a></span>
+<span id="cb44-143"><a href="#cb44-143"></a><span class="co">/* --- 5b. Riconoscimento linguaggio --- */</span></span>
+<span id="cb44-144"><a href="#cb44-144"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">r</span><span class="op">),</span></span>
+<span id="cb44-145"><a href="#cb44-145"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>r<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb44-146"><a href="#cb44-146"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">r</span><span class="op">)::</span>before<span class="op">,</span></span>
+<span id="cb44-147"><a href="#cb44-147"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>r<span class="op">)::</span>before <span class="op">{</span> content<span class="op">:</span> <span class="st">"R"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb44-148"><a href="#cb44-148"></a></span>
+<span id="cb44-149"><a href="#cb44-149"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">bash</span><span class="op">),</span></span>
+<span id="cb44-150"><a href="#cb44-150"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>bash<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb44-151"><a href="#cb44-151"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">bash</span><span class="op">)::</span>before<span class="op">,</span></span>
+<span id="cb44-152"><a href="#cb44-152"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>bash<span class="op">)::</span>before <span class="op">{</span> content<span class="op">:</span> <span class="st">"BASH"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb44-153"><a href="#cb44-153"></a></span>
+<span id="cb44-154"><a href="#cb44-154"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">python</span><span class="op">),</span></span>
+<span id="cb44-155"><a href="#cb44-155"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>python<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb44-156"><a href="#cb44-156"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">python</span><span class="op">)::</span>before<span class="op">,</span></span>
+<span id="cb44-157"><a href="#cb44-157"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>python<span class="op">)::</span>before <span class="op">{</span> content<span class="op">:</span> <span class="st">"PYTHON"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb44-158"><a href="#cb44-158"></a></span>
+<span id="cb44-159"><a href="#cb44-159"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">css</span><span class="op">),</span></span>
+<span id="cb44-160"><a href="#cb44-160"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>css<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb44-161"><a href="#cb44-161"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">css</span><span class="op">)::</span>before<span class="op">,</span></span>
+<span id="cb44-162"><a href="#cb44-162"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>css<span class="op">)::</span>before <span class="op">{</span> content<span class="op">:</span> <span class="st">"CSS"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb44-163"><a href="#cb44-163"></a></span>
+<span id="cb44-164"><a href="#cb44-164"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">json</span><span class="op">),</span></span>
+<span id="cb44-165"><a href="#cb44-165"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>json<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb44-166"><a href="#cb44-166"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">json</span><span class="op">)::</span>before<span class="op">,</span></span>
+<span id="cb44-167"><a href="#cb44-167"></a>div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">:</span><span class="fu">has</span><span class="op">(.</span><span class="fu">language</span><span class="op">-</span>json<span class="op">)::</span>before <span class="op">{</span> content<span class="op">:</span> <span class="st">"JSON"</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb44-168"><a href="#cb44-168"></a></span>
+<span id="cb44-169"><a href="#cb44-169"></a><span class="co">/* --- 6. OUTPUT (RISULTATI ARANCIONI) --- */</span></span>
+<span id="cb44-170"><a href="#cb44-170"></a>div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stdout pre<span class="op">,</span></span>
+<span id="cb44-171"><a href="#cb44-171"></a>div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stderr pre <span class="op">{</span></span>
+<span id="cb44-172"><a href="#cb44-172"></a>background<span class="op">-</span>color<span class="op">:</span> #<span class="dv">2</span>d3648 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-173"><a href="#cb44-173"></a>border<span class="op">:</span> <span class="dv">1</span>px solid #<span class="dv">3</span>d4758<span class="op">;</span></span>
+<span id="cb44-174"><a href="#cb44-174"></a>border<span class="op">-</span>radius<span class="op">:</span> <span class="dv">6</span>px<span class="op">;</span></span>
+<span id="cb44-175"><a href="#cb44-175"></a>padding<span class="op">:</span> <span class="fl">0.8</span>em <span class="dv">1</span>em <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-176"><a href="#cb44-176"></a><span class="op">}</span></span>
+<span id="cb44-177"><a href="#cb44-177"></a></span>
+<span id="cb44-178"><a href="#cb44-178"></a>div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stdout pre<span class="op">,</span> div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stdout pre code<span class="op">,</span></span>
+<span id="cb44-179"><a href="#cb44-179"></a>div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stderr pre<span class="op">,</span> div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stderr pre code <span class="op">{</span></span>
+<span id="cb44-180"><a href="#cb44-180"></a>color<span class="op">:</span> #ff8866 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-181"><a href="#cb44-181"></a><span class="op">}</span></span>
+<span id="cb44-182"><a href="#cb44-182"></a></span>
+<span id="cb44-183"><a href="#cb44-183"></a><span class="co">/* --- 7. BOTTONE COPIA --- */</span></span>
+<span id="cb44-184"><a href="#cb44-184"></a><span class="op">.</span><span class="fu">code</span><span class="op">-</span>copy<span class="op">-</span>button <span class="op">{</span></span>
+<span id="cb44-185"><a href="#cb44-185"></a>position<span class="op">:</span> absolute <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-186"><a href="#cb44-186"></a>top<span class="op">:</span> <span class="dv">6</span>px <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-187"><a href="#cb44-187"></a>right<span class="op">:</span> <span class="dv">6</span>px <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-188"><a href="#cb44-188"></a>z<span class="op">-</span>index<span class="op">:</span> <span class="dv">100</span> <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-189"><a href="#cb44-189"></a>background<span class="op">-</span>color<span class="op">:</span> #<span class="dv">3</span>d4758 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-190"><a href="#cb44-190"></a>color<span class="op">:</span> #d4d4d4 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-191"><a href="#cb44-191"></a>border<span class="op">:</span> <span class="dv">1</span>px solid #<span class="dv">4</span>d5768 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-192"><a href="#cb44-192"></a><span class="op">}</span></span>
+<span id="cb44-193"><a href="#cb44-193"></a></span>
+<span id="cb44-194"><a href="#cb44-194"></a><span class="op">.</span><span class="fu">code</span><span class="op">-</span>copy<span class="op">-</span>button<span class="op">:</span>hover <span class="op">{</span></span>
+<span id="cb44-195"><a href="#cb44-195"></a>background<span class="op">-</span>color<span class="op">:</span> #<span class="dv">4</span>d5768 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-196"><a href="#cb44-196"></a><span class="op">}</span></span>
+<span id="cb44-197"><a href="#cb44-197"></a></span>
+<span id="cb44-198"><a href="#cb44-198"></a><span class="co">/* --- 8. DARK MODE - syntax highlighting --- */</span></span>
+<span id="cb44-199"><a href="#cb44-199"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">kw</span> <span class="op">{</span> color<span class="op">:</span> #ff79c6 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* keywords - rosa */</span></span>
+<span id="cb44-200"><a href="#cb44-200"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">dt</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">8</span>be9fd <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* data types - cyan */</span></span>
+<span id="cb44-201"><a href="#cb44-201"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">dv</span> <span class="op">{</span> color<span class="op">:</span> #bd93f9 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* numeri - viola */</span></span>
+<span id="cb44-202"><a href="#cb44-202"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">st</span> <span class="op">{</span> color<span class="op">:</span> #f1fa8c <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* stringhe - giallo */</span></span>
+<span id="cb44-203"><a href="#cb44-203"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">co</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">6272</span>a4 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* commenti - grigio blu */</span></span>
+<span id="cb44-204"><a href="#cb44-204"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">fu</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">50</span>fa7b <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* funzioni - verde */</span></span>
+<span id="cb44-205"><a href="#cb44-205"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">op</span> <span class="op">{</span> color<span class="op">:</span> #ff79c6 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* operatori - rosa */</span></span>
+<span id="cb44-206"><a href="#cb44-206"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">va</span> <span class="op">{</span> color<span class="op">:</span> #f8f8f2 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* variabili - bianco */</span></span>
+<span id="cb44-207"><a href="#cb44-207"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">at</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">50</span>fa7b <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* attributi - verde */</span></span>
+<span id="cb44-208"><a href="#cb44-208"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">dark</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">ss</span> <span class="op">{</span> color<span class="op">:</span> #f1fa8c <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* special strings - giallo */</span></span>
+<span id="cb44-209"><a href="#cb44-209"></a></span>
+<span id="cb44-210"><a href="#cb44-210"></a><span class="co">/* ============================ */</span></span>
+<span id="cb44-211"><a href="#cb44-211"></a><span class="co">/*     LIGHT MODE OVERRIDES     */</span></span>
+<span id="cb44-212"><a href="#cb44-212"></a><span class="co">/* ============================ */</span></span>
+<span id="cb44-213"><a href="#cb44-213"></a></span>
+<span id="cb44-214"><a href="#cb44-214"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode body <span class="op">{</span></span>
+<span id="cb44-215"><a href="#cb44-215"></a>background<span class="op">-</span>color<span class="op">:</span> #e8eef5 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-216"><a href="#cb44-216"></a>color<span class="op">:</span> #<span class="dv">2</span>c3e50 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-217"><a href="#cb44-217"></a><span class="op">}</span></span>
+<span id="cb44-218"><a href="#cb44-218"></a></span>
+<span id="cb44-219"><a href="#cb44-219"></a><span class="co">/* Box codice: sfondo chiaro + colonna numeri chiara */</span></span>
+<span id="cb44-220"><a href="#cb44-220"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> <span class="op">{</span></span>
+<span id="cb44-221"><a href="#cb44-221"></a>background<span class="op">:</span> linear<span class="op">-</span><span class="fu">gradient</span><span class="op">(</span></span>
+<span id="cb44-222"><a href="#cb44-222"></a><span class="dv">90</span>deg<span class="op">,</span></span>
+<span id="cb44-223"><a href="#cb44-223"></a>#d7d7e0 <span class="dv">0</span><span class="op">%,</span> #d7d7e0 <span class="dv">50</span>px<span class="op">,</span></span>
+<span id="cb44-224"><a href="#cb44-224"></a>#ffffff <span class="dv">50</span>px<span class="op">,</span> #ffffff <span class="dv">100</span><span class="op">%</span></span>
+<span id="cb44-225"><a href="#cb44-225"></a><span class="op">)</span> <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-226"><a href="#cb44-226"></a>border<span class="op">-</span>color<span class="op">:</span> #bfc6d1 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-227"><a href="#cb44-227"></a><span class="op">}</span></span>
+<span id="cb44-228"><a href="#cb44-228"></a></span>
+<span id="cb44-229"><a href="#cb44-229"></a><span class="co">/* FORZA TUTTO IL TESTO NEL CODICE A ESSERE SCURO */</span></span>
+<span id="cb44-230"><a href="#cb44-230"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> pre <span class="op">*,</span></span>
+<span id="cb44-231"><a href="#cb44-231"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> pre code <span class="op">*,</span></span>
+<span id="cb44-232"><a href="#cb44-232"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> span<span class="op">,</span></span>
+<span id="cb44-233"><a href="#cb44-233"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> code span <span class="op">{</span></span>
+<span id="cb44-234"><a href="#cb44-234"></a>color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-235"><a href="#cb44-235"></a><span class="op">}</span></span>
+<span id="cb44-236"><a href="#cb44-236"></a></span>
+<span id="cb44-237"><a href="#cb44-237"></a><span class="co">/* numeri di riga */</span></span>
+<span id="cb44-238"><a href="#cb44-238"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">linenos</span><span class="op">,</span></span>
+<span id="cb44-239"><a href="#cb44-239"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span> pre code a <span class="op">{</span></span>
+<span id="cb44-240"><a href="#cb44-240"></a>color<span class="op">:</span> #<span class="dv">6</span>b7280 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-241"><a href="#cb44-241"></a><span class="op">}</span></span>
+<span id="cb44-242"><a href="#cb44-242"></a></span>
+<span id="cb44-243"><a href="#cb44-243"></a><span class="co">/* header del linguaggio */</span></span>
+<span id="cb44-244"><a href="#cb44-244"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">sourceCode</span><span class="op">::</span>before <span class="op">{</span></span>
+<span id="cb44-245"><a href="#cb44-245"></a>background<span class="op">-</span>color<span class="op">:</span> #d7d7e0 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-246"><a href="#cb44-246"></a>color<span class="op">:</span> #<span class="dv">555</span> <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-247"><a href="#cb44-247"></a>border<span class="op">-</span>bottom<span class="op">:</span> <span class="dv">1</span>px solid #bfc6d1 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-248"><a href="#cb44-248"></a><span class="op">}</span></span>
+<span id="cb44-249"><a href="#cb44-249"></a></span>
+<span id="cb44-250"><a href="#cb44-250"></a><span class="co">/* output */</span></span>
+<span id="cb44-251"><a href="#cb44-251"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stdout pre<span class="op">,</span></span>
+<span id="cb44-252"><a href="#cb44-252"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stderr pre <span class="op">{</span></span>
+<span id="cb44-253"><a href="#cb44-253"></a>background<span class="op">-</span>color<span class="op">:</span> #ffffff <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-254"><a href="#cb44-254"></a>border<span class="op">:</span> <span class="dv">1</span>px solid #bfc6d1 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-255"><a href="#cb44-255"></a><span class="op">}</span></span>
+<span id="cb44-256"><a href="#cb44-256"></a></span>
+<span id="cb44-257"><a href="#cb44-257"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stdout pre code<span class="op">,</span></span>
+<span id="cb44-258"><a href="#cb44-258"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode div<span class="op">.</span><span class="fu">cell</span><span class="op">-</span>output<span class="op">-</span>stderr pre code <span class="op">{</span></span>
+<span id="cb44-259"><a href="#cb44-259"></a>color<span class="op">:</span> #a83200 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-260"><a href="#cb44-260"></a><span class="op">}</span></span>
+<span id="cb44-261"><a href="#cb44-261"></a></span>
+<span id="cb44-262"><a href="#cb44-262"></a><span class="co">/* bottone copia */</span></span>
+<span id="cb44-263"><a href="#cb44-263"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">code</span><span class="op">-</span>copy<span class="op">-</span>button <span class="op">{</span></span>
+<span id="cb44-264"><a href="#cb44-264"></a>background<span class="op">-</span>color<span class="op">:</span> #d7d7e0 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-265"><a href="#cb44-265"></a>color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-266"><a href="#cb44-266"></a>border<span class="op">:</span> <span class="dv">1</span>px solid #bfc6d1 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-267"><a href="#cb44-267"></a><span class="op">}</span></span>
+<span id="cb44-268"><a href="#cb44-268"></a></span>
+<span id="cb44-269"><a href="#cb44-269"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">code</span><span class="op">-</span>copy<span class="op">-</span>button<span class="op">:</span>hover <span class="op">{</span></span>
+<span id="cb44-270"><a href="#cb44-270"></a>background<span class="op">-</span>color<span class="op">:</span> #c7c7d0 <span class="op">!</span>important<span class="op">;</span></span>
+<span id="cb44-271"><a href="#cb44-271"></a><span class="op">}</span></span>
+<span id="cb44-272"><a href="#cb44-272"></a></span>
+<span id="cb44-273"><a href="#cb44-273"></a><span class="co">/* LIGHT MODE - syntax highlighting personalizzato */</span></span>
+<span id="cb44-274"><a href="#cb44-274"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">kw</span> <span class="op">{</span> color<span class="op">:</span> #a626a4 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* keywords - viola */</span></span>
+<span id="cb44-275"><a href="#cb44-275"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">dt</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">0184</span>bc <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* data types - blu */</span></span>
+<span id="cb44-276"><a href="#cb44-276"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">dv</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">986801</span> <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* numeri - arancione */</span></span>
+<span id="cb44-277"><a href="#cb44-277"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">st</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">50</span>a14f <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* stringhe - verde */</span></span>
+<span id="cb44-278"><a href="#cb44-278"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">co</span> <span class="op">{</span> color<span class="op">:</span> #a0a1a7 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* commenti - grigio */</span></span>
+<span id="cb44-279"><a href="#cb44-279"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">fu</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">4078</span>f2 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* funzioni - blu */</span></span>
+<span id="cb44-280"><a href="#cb44-280"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">op</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* operatori - nero */</span></span>
+<span id="cb44-281"><a href="#cb44-281"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">va</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* variabili - nero */</span></span>
+<span id="cb44-282"><a href="#cb44-282"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">at</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">4078</span>f2 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* attributi - blu */</span></span>
+<span id="cb44-283"><a href="#cb44-283"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">ss</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">50</span>a14f <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* special strings - verde */</span></span>
+<span id="cb44-284"><a href="#cb44-284"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">sc</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* special char - nero */</span></span>
+<span id="cb44-285"><a href="#cb44-285"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">bn</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">986801</span> <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* base n - arancione */</span></span>
+<span id="cb44-286"><a href="#cb44-286"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">fl</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">986801</span> <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* float - arancione */</span></span>
+<span id="cb44-287"><a href="#cb44-287"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">ch</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">50</span>a14f <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* char - verde */</span></span>
+<span id="cb44-288"><a href="#cb44-288"></a><span class="op">:</span>root<span class="op">.</span><span class="fu">light</span><span class="op">-</span>mode <span class="op">.</span><span class="fu">sourceCode</span> <span class="op">.</span><span class="fu">cn</span> <span class="op">{</span> color<span class="op">:</span> #<span class="dv">383</span>a42 <span class="op">!</span>important<span class="op">;</span> <span class="op">}</span> <span class="co">/* constant - nero */</span></span>
+<span id="cb44-289"><a href="#cb44-289"></a><span class="in">```</span></span>
+<span id="cb44-290"><a href="#cb44-290"></a></span>
+<span id="cb44-291"><a href="#cb44-291"></a><span class="fu">## Quarto</span></span>
+<span id="cb44-292"><a href="#cb44-292"></a></span>
+<span id="cb44-293"><a href="#cb44-293"></a>This is a Quarto document. Quarto is a multi-language, next-generation version of R Markdown. Check the <span class="co">[</span><span class="ot">tutorial</span><span class="co">](https://quarto.org/docs/get-started/hello/rstudio.html)</span>.\</span>
+<span id="cb44-294"><a href="#cb44-294"></a>N.B. - Learn the IT foundations to master bioinformatics tools and softwares, and prevent getting tangled on the infamous "dependency hell". Ask for the "Foundations of Bioinformatics Infrastructure".</span>
+<span id="cb44-295"><a href="#cb44-295"></a></span>
+<span id="cb44-296"><a href="#cb44-296"></a><span class="fu">## Create and activate the environment "bioinfo"</span></span>
+<span id="cb44-297"><a href="#cb44-297"></a></span>
+<span id="cb44-300"><a href="#cb44-300"></a><span class="in">```{bash}</span></span>
+<span id="cb44-301"><a href="#cb44-301"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-302"><a href="#cb44-302"></a><span class="ex">mamba</span> create <span class="at">-n</span> bioinfo python=3.11</span>
+<span id="cb44-303"><a href="#cb44-303"></a><span class="ex">mamba</span> activate bioinfo</span>
+<span id="cb44-304"><a href="#cb44-304"></a><span class="in">```</span></span>
+<span id="cb44-305"><a href="#cb44-305"></a></span>
+<span id="cb44-306"><a href="#cb44-306"></a><span class="fu">## Download the RNA-seq dataset</span></span>
+<span id="cb44-307"><a href="#cb44-307"></a></span>
+<span id="cb44-308"><a href="#cb44-308"></a>Let's use a real example - <span class="co">[</span><span class="ot">*RNA-seq of ITPR3 and RELB knockout in SW480 under normoxia and hypoxia*</span><span class="co">]</span>{.underline} (*Homo sapiens*) <span class="ot">&lt;https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197576&gt;</span>.</span>
+<span id="cb44-309"><a href="#cb44-309"></a></span>
+<span id="cb44-310"><a href="#cb44-310"></a><span class="al">![](images/IM1.png)</span></span>
+<span id="cb44-311"><a href="#cb44-311"></a></span>
+<span id="cb44-312"><a href="#cb44-312"></a>N.B. - Structure properly your folder ('mkdir folder'):\</span>
+<span id="cb44-313"><a href="#cb44-313"></a></span>
+<span id="cb44-316"><a href="#cb44-316"></a><span class="in">```{bash}</span></span>
+<span id="cb44-317"><a href="#cb44-317"></a><span class="co">#| echo: false</span></span>
+<span id="cb44-318"><a href="#cb44-318"></a><span class="bu">cd</span> ..</span>
+<span id="cb44-319"><a href="#cb44-319"></a><span class="bu">printf</span> <span class="st">".\n├── data/\n├── scripts/\n└── results/\n"</span></span>
+<span id="cb44-320"><a href="#cb44-320"></a><span class="in">```</span></span>
+<span id="cb44-321"><a href="#cb44-321"></a></span>
+<span id="cb44-322"><a href="#cb44-322"></a>How to download the files from FTP with UNIX terminal: <span class="ot">&lt;https://www.ncbi.nlm.nih.gov/geo/info/download.html&gt;</span>\</span>
+<span id="cb44-323"><a href="#cb44-323"></a><span class="ot">&lt;https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/&gt;</span></span>
+<span id="cb44-324"><a href="#cb44-324"></a></span>
+<span id="cb44-327"><a href="#cb44-327"></a><span class="in">```{bash}</span></span>
+<span id="cb44-328"><a href="#cb44-328"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-329"><a href="#cb44-329"></a><span class="co"># Move to /data folder !!!</span></span>
+<span id="cb44-330"><a href="#cb44-330"></a><span class="bu">cd</span> data</span>
+<span id="cb44-331"><a href="#cb44-331"></a><span class="fu">wget</span> https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/GSE197576_raw_gene_counts_matrix.tsv.gz</span>
+<span id="cb44-332"><a href="#cb44-332"></a><span class="in">```</span></span>
+<span id="cb44-333"><a href="#cb44-333"></a></span>
+<span id="cb44-334"><a href="#cb44-334"></a>Alternative use GEOquery <span class="ot">&lt;https://bioconductor.org/packages/release/bioc/html/GEOquery.html&gt;</span>.</span>
+<span id="cb44-335"><a href="#cb44-335"></a></span>
+<span id="cb44-336"><a href="#cb44-336"></a><span class="fu">## Check the data ad extract the samples of interest</span></span>
+<span id="cb44-337"><a href="#cb44-337"></a></span>
+<span id="cb44-338"><a href="#cb44-338"></a>Check the data in the compressed RNA-seq file.</span>
+<span id="cb44-339"><a href="#cb44-339"></a></span>
+<span id="cb44-342"><a href="#cb44-342"></a><span class="in">```{bash}</span></span>
+<span id="cb44-343"><a href="#cb44-343"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-344"><a href="#cb44-344"></a><span class="fu">zless</span> <span class="at">-S</span> GSE197576_raw_gene_counts_matrix.tsv.gz</span>
+<span id="cb44-345"><a href="#cb44-345"></a><span class="co"># z because is compressed</span></span>
+<span id="cb44-346"><a href="#cb44-346"></a><span class="co"># less is the faster command to view the conte of a file</span></span>
+<span id="cb44-347"><a href="#cb44-347"></a><span class="co"># -S maintain one raw column</span></span>
+<span id="cb44-348"><a href="#cb44-348"></a><span class="co"># press q to quit</span></span>
+<span id="cb44-349"><a href="#cb44-349"></a><span class="in">```</span></span>
+<span id="cb44-350"><a href="#cb44-350"></a></span>
+<span id="cb44-351"><a href="#cb44-351"></a>Install csvtk annd check the data in a pretty aligned manner.</span>
+<span id="cb44-352"><a href="#cb44-352"></a></span>
+<span id="cb44-355"><a href="#cb44-355"></a><span class="in">```{bash}</span></span>
+<span id="cb44-356"><a href="#cb44-356"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-357"><a href="#cb44-357"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda csvtk</span>
+<span id="cb44-358"><a href="#cb44-358"></a><span class="in">```</span></span>
+<span id="cb44-359"><a href="#cb44-359"></a></span>
+<span id="cb44-362"><a href="#cb44-362"></a><span class="in">```{bash}</span></span>
+<span id="cb44-363"><a href="#cb44-363"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-364"><a href="#cb44-364"></a><span class="ex">csvtk</span> pretty <span class="at">-t</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="kw">|</span> <span class="fu">less</span> <span class="at">-S</span></span>
+<span id="cb44-365"><a href="#cb44-365"></a><span class="co"># -t tab the limit</span></span>
+<span id="cb44-366"><a href="#cb44-366"></a><span class="co"># press q to quit</span></span>
+<span id="cb44-367"><a href="#cb44-367"></a><span class="in">```</span></span>
+<span id="cb44-368"><a href="#cb44-368"></a></span>
+<span id="cb44-371"><a href="#cb44-371"></a><span class="in">```{bash}</span></span>
+<span id="cb44-372"><a href="#cb44-372"></a><span class="co">#| echo: true</span></span>
+<span id="cb44-373"><a href="#cb44-373"></a><span class="ex">csvtk</span> headers <span class="at">-t</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz </span>
+<span id="cb44-374"><a href="#cb44-374"></a><span class="in">```</span></span>
+<span id="cb44-375"><a href="#cb44-375"></a></span>
+<span id="cb44-376"><a href="#cb44-376"></a>N.B - Get csvtk at <span class="ot">&lt;https://github.com/shenwei356/csvtk&gt;</span></span>
+<span id="cb44-377"><a href="#cb44-377"></a></span>
+<span id="cb44-378"><a href="#cb44-378"></a>Extract the gene expression values from:</span>
+<span id="cb44-379"><a href="#cb44-379"></a></span>
+<span id="cb44-380"><a href="#cb44-380"></a><span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb44-381"><a href="#cb44-381"></a><span class="pp">|------------------|------------------|------------------|------------------|</span></span>
+<span id="cb44-382"><a href="#cb44-382"></a><span class="pp">|</span> *01_SW_sgCTRL_Norm* | *02_SW_sgCTRL_Norm* | *17_SW_sgRELB_3_Hyp* | *18_SW_sgRELB_3_Hyp* <span class="pp">|</span></span>
+<span id="cb44-383"><a href="#cb44-383"></a></span>
+<span id="cb44-386"><a href="#cb44-386"></a><span class="in">```{bash}</span></span>
+<span id="cb44-387"><a href="#cb44-387"></a><span class="ex">csvtk</span> cut <span class="at">-t</span> <span class="at">-f1,2,3,12,13</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="kw">|</span> <span class="ex">column</span> <span class="at">-t</span> <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb44-388"><a href="#cb44-388"></a><span class="in">```</span></span>
+<span id="cb44-389"><a href="#cb44-389"></a></span>
+<span id="cb44-392"><a href="#cb44-392"></a><span class="in">```{bash}</span></span>
+<span id="cb44-393"><a href="#cb44-393"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-394"><a href="#cb44-394"></a><span class="ex">csvtk</span> cut <span class="at">-t</span> <span class="at">-f1,1,2,12,13</span> ../data/GSE197576_raw_gene_counts_matrix.tsv.gz <span class="op">&gt;</span> raw.counts.tsv</span>
+<span id="cb44-395"><a href="#cb44-395"></a><span class="in">```</span></span>
+<span id="cb44-396"><a href="#cb44-396"></a></span>
+<span id="cb44-397"><a href="#cb44-397"></a>Your */data* folder now contains:</span>
+<span id="cb44-398"><a href="#cb44-398"></a></span>
+<span id="cb44-401"><a href="#cb44-401"></a><span class="in">```{bash}</span></span>
+<span id="cb44-402"><a href="#cb44-402"></a><span class="co">#| echo: false</span></span>
+<span id="cb44-403"><a href="#cb44-403"></a><span class="bu">cd</span> ..</span>
+<span id="cb44-404"><a href="#cb44-404"></a><span class="ex">tree</span> <span class="at">-n</span> <span class="at">-F</span> <span class="at">-L</span> 1 <span class="at">--noreport</span> data </span>
+<span id="cb44-405"><a href="#cb44-405"></a><span class="in">```</span></span>
+<span id="cb44-406"><a href="#cb44-406"></a></span>
+<span id="cb44-407"><a href="#cb44-407"></a><span class="fu">## Read the data into R and make a DESeq2 object</span></span>
+<span id="cb44-408"><a href="#cb44-408"></a></span>
+<span id="cb44-409"><a href="#cb44-409"></a>Follow the tutorial <span class="ot">&lt;http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html&gt;</span>.</span>
+<span id="cb44-410"><a href="#cb44-410"></a></span>
+<span id="cb44-411"><a href="#cb44-411"></a><span class="fu">### Setup</span></span>
+<span id="cb44-412"><a href="#cb44-412"></a></span>
+<span id="cb44-413"><a href="#cb44-413"></a>Install the R-packages for this project within the 'bioinfo' virtual environment.</span>
+<span id="cb44-414"><a href="#cb44-414"></a></span>
+<span id="cb44-417"><a href="#cb44-417"></a><span class="in">```{bash}</span></span>
+<span id="cb44-418"><a href="#cb44-418"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-419"><a href="#cb44-419"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-tidyverse</span>
+<span id="cb44-420"><a href="#cb44-420"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-dplyr</span>
+<span id="cb44-421"><a href="#cb44-421"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-here</span>
+<span id="cb44-422"><a href="#cb44-422"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-deseq2</span>
+<span id="cb44-423"><a href="#cb44-423"></a><span class="ex">mamba</span> intall <span class="at">-c</span> conda-forge r-ggplot2</span>
+<span id="cb44-424"><a href="#cb44-424"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-ggrepel</span>
+<span id="cb44-425"><a href="#cb44-425"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager   </span>
+<span id="cb44-426"><a href="#cb44-426"></a><span class="in">```</span></span>
+<span id="cb44-427"><a href="#cb44-427"></a></span>
+<span id="cb44-428"><a href="#cb44-428"></a>Save the environment for reproducibility.</span>
+<span id="cb44-429"><a href="#cb44-429"></a></span>
+<span id="cb44-432"><a href="#cb44-432"></a><span class="in">```{bash}</span></span>
+<span id="cb44-433"><a href="#cb44-433"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-434"><a href="#cb44-434"></a><span class="ex">mamba</span> env export <span class="at">--no-builds</span> <span class="op">&gt;</span> bioinfo_environment.yml</span>
+<span id="cb44-435"><a href="#cb44-435"></a><span class="in">```</span></span>
+<span id="cb44-436"><a href="#cb44-436"></a></span>
+<span id="cb44-437"><a href="#cb44-437"></a>Open RStudio from the terminal: you are now working with the R software within 'bioinfo' and you can find the packages previously installed.</span>
+<span id="cb44-438"><a href="#cb44-438"></a></span>
+<span id="cb44-441"><a href="#cb44-441"></a><span class="in">```{bash}</span></span>
+<span id="cb44-442"><a href="#cb44-442"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-443"><a href="#cb44-443"></a><span class="ex">open</span> <span class="at">-na</span> RStudio</span>
+<span id="cb44-444"><a href="#cb44-444"></a><span class="in">```</span></span>
+<span id="cb44-445"><a href="#cb44-445"></a></span>
+<span id="cb44-446"><a href="#cb44-446"></a><span class="fu">### Let’s start</span></span>
+<span id="cb44-447"><a href="#cb44-447"></a></span>
+<span id="cb44-450"><a href="#cb44-450"></a><span class="in">```{r}</span></span>
+<span id="cb44-451"><a href="#cb44-451"></a><span class="co">#| message: false</span></span>
+<span id="cb44-452"><a href="#cb44-452"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-453"><a href="#cb44-453"></a><span class="fu">library</span>(dplyr) <span class="co">#https://dplyr.tidyverse.org/</span></span>
+<span id="cb44-454"><a href="#cb44-454"></a><span class="fu">library</span>(readr) <span class="co">#https://readr.tidyverse.org/</span></span>
+<span id="cb44-455"><a href="#cb44-455"></a><span class="fu">library</span>(here) <span class="co">#https://cran.r-project.org/web/packages/here/vignettes/here.html</span></span>
+<span id="cb44-456"><a href="#cb44-456"></a><span class="fu">library</span>(DESeq2) <span class="co">#https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</span></span>
+<span id="cb44-457"><a href="#cb44-457"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-458"><a href="#cb44-458"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb44-459"><a href="#cb44-459"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ComplexHeatmap"</span>)</span>
+<span id="cb44-460"><a href="#cb44-460"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb44-461"><a href="#cb44-461"></a></span>
+<span id="cb44-462"><a href="#cb44-462"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">here</span>(<span class="st">"01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv"</span>)) <span class="co">#import the dataset</span></span>
+<span id="cb44-463"><a href="#cb44-463"></a></span>
+<span id="cb44-464"><a href="#cb44-464"></a>raw_counts_mat <span class="ot">&lt;-</span> raw_counts[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> as.matrix <span class="co">#create the values matrix removing the first column for DESeq2</span></span>
+<span id="cb44-465"><a href="#cb44-465"></a><span class="fu">head</span>(raw_counts_mat)</span>
+<span id="cb44-466"><a href="#cb44-466"></a></span>
+<span id="cb44-467"><a href="#cb44-467"></a><span class="fu">rownames</span>(raw_counts_mat) <span class="ot">&lt;-</span> raw_counts<span class="sc">$</span>gene <span class="co">#add row names to the matrix</span></span>
+<span id="cb44-468"><a href="#cb44-468"></a><span class="fu">head</span>(raw_counts_mat)</span>
+<span id="cb44-469"><a href="#cb44-469"></a><span class="in">```</span></span>
+<span id="cb44-470"><a href="#cb44-470"></a></span>
+<span id="cb44-471"><a href="#cb44-471"></a>Make a dataframe for the metadata.</span>
+<span id="cb44-472"><a href="#cb44-472"></a></span>
+<span id="cb44-475"><a href="#cb44-475"></a><span class="in">```{r}</span></span>
+<span id="cb44-476"><a href="#cb44-476"></a><span class="co">#| message: false</span></span>
+<span id="cb44-477"><a href="#cb44-477"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-478"><a href="#cb44-478"></a>metaframe <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">condition =</span> <span class="fu">c</span> (<span class="st">"normoxia"</span>, <span class="st">"normoxia"</span>, <span class="st">"hypoxia"</span>, <span class="st">"hypoxia"</span>))</span>
+<span id="cb44-479"><a href="#cb44-479"></a><span class="fu">rownames</span>(metaframe) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(raw_counts_mat)</span>
+<span id="cb44-480"><a href="#cb44-480"></a>metaframe</span>
+<span id="cb44-481"><a href="#cb44-481"></a><span class="in">```</span></span>
+<span id="cb44-482"><a href="#cb44-482"></a></span>
+<span id="cb44-483"><a href="#cb44-483"></a>Make a DESeq2 object (<span class="co">[</span><span class="ot">tutorial</span><span class="co">](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)</span>).</span>
+<span id="cb44-484"><a href="#cb44-484"></a></span>
+<span id="cb44-487"><a href="#cb44-487"></a><span class="in">```{r}</span></span>
+<span id="cb44-488"><a href="#cb44-488"></a><span class="co">#| message: false</span></span>
+<span id="cb44-489"><a href="#cb44-489"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-490"><a href="#cb44-490"></a><span class="fu">all</span>(<span class="fu">rownames</span>(metaframe) <span class="sc">==</span> <span class="fu">colnames</span>(raw_counts_mat)) <span class="co">#check</span></span>
+<span id="cb44-491"><a href="#cb44-491"></a></span>
+<span id="cb44-492"><a href="#cb44-492"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData =</span> raw_counts_mat, <span class="co">#input object with design</span></span>
+<span id="cb44-493"><a href="#cb44-493"></a>                              <span class="at">colData =</span> metaframe,</span>
+<span id="cb44-494"><a href="#cb44-494"></a>                              <span class="at">design =</span> <span class="sc">~</span> condition)</span>
+<span id="cb44-495"><a href="#cb44-495"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(dds) <span class="co">#DE analysis</span></span>
+<span id="cb44-496"><a href="#cb44-496"></a></span>
+<span id="cb44-497"><a href="#cb44-497"></a>?results</span>
+<span id="cb44-498"><a href="#cb44-498"></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds, <span class="at">contrast =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"hypoxia"</span>, <span class="st">"normoxia"</span>)) <span class="co">#extract results from the analysis </span></span>
+<span id="cb44-499"><a href="#cb44-499"></a></span>
+<span id="cb44-500"><a href="#cb44-500"></a>res <span class="sc">%&gt;%</span> </span>
+<span id="cb44-501"><a href="#cb44-501"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb44-502"><a href="#cb44-502"></a>  <span class="fu">arrange</span>(padj <span class="sc">&lt;=</span> <span class="fl">0.1</span>, <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co">#filter significant and substantial expression changes </span></span>
+<span id="cb44-503"><a href="#cb44-503"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb44-504"><a href="#cb44-504"></a></span>
+<span id="cb44-505"><a href="#cb44-505"></a>significant_genes <span class="ot">&lt;-</span> res <span class="sc">%&gt;%</span> <span class="co">#identify the respective genes</span></span>
+<span id="cb44-506"><a href="#cb44-506"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb44-507"><a href="#cb44-507"></a>  <span class="fu">filter</span>(padj <span class="sc">&lt;=</span> <span class="fl">0.1</span>, <span class="fu">abs</span>(log2FoldChange) <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-508"><a href="#cb44-508"></a>  <span class="fu">rownames</span>()</span>
+<span id="cb44-509"><a href="#cb44-509"></a></span>
+<span id="cb44-510"><a href="#cb44-510"></a>significant_genes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb44-511"><a href="#cb44-511"></a><span class="in">```</span></span>
+<span id="cb44-512"><a href="#cb44-512"></a></span>
+<span id="cb44-513"><a href="#cb44-513"></a><span class="fu">### PCA Analysis to verify your results</span></span>
+<span id="cb44-514"><a href="#cb44-514"></a></span>
+<span id="cb44-517"><a href="#cb44-517"></a><span class="in">```{r}</span></span>
+<span id="cb44-518"><a href="#cb44-518"></a><span class="co">#| message: true</span></span>
+<span id="cb44-519"><a href="#cb44-519"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-520"><a href="#cb44-520"></a>vsd <span class="ot">&lt;-</span> <span class="fu">vst</span>(dds, <span class="at">blind =</span> F) <span class="co">#normalization applying a variance stabilizing transformation (VST)</span></span>
+<span id="cb44-521"><a href="#cb44-521"></a></span>
+<span id="cb44-522"><a href="#cb44-522"></a>p <span class="ot">&lt;-</span> <span class="fu">plotPCA</span>(vsd, <span class="at">intgroup =</span> <span class="fu">c</span>(<span class="st">"condition"</span>))</span>
+<span id="cb44-523"><a href="#cb44-523"></a>p <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>))</span>
+<span id="cb44-524"><a href="#cb44-524"></a><span class="in">```</span></span>
+<span id="cb44-525"><a href="#cb44-525"></a></span>
+<span id="cb44-526"><a href="#cb44-526"></a>You can make a PCA by yourself.</span>
+<span id="cb44-527"><a href="#cb44-527"></a></span>
+<span id="cb44-530"><a href="#cb44-530"></a><span class="in">```{r}</span></span>
+<span id="cb44-531"><a href="#cb44-531"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-532"><a href="#cb44-532"></a><span class="co"># vsd &lt;- vst(dds, blind = F)</span></span>
+<span id="cb44-533"><a href="#cb44-533"></a><span class="fu">head</span>(<span class="fu">assay</span>(vsd), <span class="dv">3</span>)</span>
+<span id="cb44-534"><a href="#cb44-534"></a>?assay</span>
+<span id="cb44-535"><a href="#cb44-535"></a></span>
+<span id="cb44-536"><a href="#cb44-536"></a>normalized_vsd <span class="ot">&lt;-</span> <span class="fu">assay</span>(vsd) <span class="sc">%&gt;%</span> <span class="co">#from DeSeq object to matrix</span></span>
+<span id="cb44-537"><a href="#cb44-537"></a> <span class="fu">as.matrix</span>()</span>
+<span id="cb44-538"><a href="#cb44-538"></a></span>
+<span id="cb44-539"><a href="#cb44-539"></a>pca_prcomp <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(normalized_vsd), <span class="at">center =</span> T, <span class="at">scale. =</span> F) <span class="co">#PCA analysis</span></span>
+<span id="cb44-540"><a href="#cb44-540"></a></span>
+<span id="cb44-541"><a href="#cb44-541"></a><span class="fu">names</span>(pca_prcomp)</span>
+<span id="cb44-542"><a href="#cb44-542"></a>pca_prcomp<span class="sc">$</span>x</span>
+<span id="cb44-543"><a href="#cb44-543"></a></span>
+<span id="cb44-544"><a href="#cb44-544"></a>PC1_PC2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb44-545"><a href="#cb44-545"></a>  <span class="at">PC1 =</span> pca_prcomp<span class="sc">$</span>x[,<span class="dv">1</span>],</span>
+<span id="cb44-546"><a href="#cb44-546"></a>  <span class="at">PC2 =</span> pca_prcomp<span class="sc">$</span>x[,<span class="dv">2</span>],</span>
+<span id="cb44-547"><a href="#cb44-547"></a>  <span class="at">type =</span> <span class="fu">rownames</span>(pca_prcomp<span class="sc">$</span>x)</span>
+<span id="cb44-548"><a href="#cb44-548"></a>)</span>
+<span id="cb44-549"><a href="#cb44-549"></a></span>
+<span id="cb44-550"><a href="#cb44-550"></a>var_explained <span class="ot">&lt;-</span> (pca_prcomp<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(pca_prcomp<span class="sc">$</span>sdev<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb44-551"><a href="#cb44-551"></a>pc1_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(var_explained[<span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb44-552"><a href="#cb44-552"></a>pc2_percent <span class="ot">&lt;-</span> <span class="fu">round</span>(var_explained[<span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb44-553"><a href="#cb44-553"></a></span>
+<span id="cb44-554"><a href="#cb44-554"></a><span class="fu">ggplot</span>(PC1_PC2, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">col =</span> type)) <span class="sc">+</span></span>
+<span id="cb44-555"><a href="#cb44-555"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb44-556"><a href="#cb44-556"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb44-557"><a href="#cb44-557"></a>    <span class="fu">aes</span>(<span class="at">label =</span> type),</span>
+<span id="cb44-558"><a href="#cb44-558"></a>    <span class="at">box.padding =</span> <span class="fl">0.5</span>,</span>
+<span id="cb44-559"><a href="#cb44-559"></a>    <span class="at">point.padding =</span> <span class="fl">0.3</span>,</span>
+<span id="cb44-560"><a href="#cb44-560"></a>    <span class="at">segment.size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb44-561"><a href="#cb44-561"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span></span>
+<span id="cb44-562"><a href="#cb44-562"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-563"><a href="#cb44-563"></a>  </span>
+<span id="cb44-564"><a href="#cb44-564"></a>  <span class="fu">labs</span>(</span>
+<span id="cb44-565"><a href="#cb44-565"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, pc1_percent, <span class="st">"% variance)"</span>),</span>
+<span id="cb44-566"><a href="#cb44-566"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, pc2_percent, <span class="st">"% variance)"</span>)</span>
+<span id="cb44-567"><a href="#cb44-567"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-568"><a href="#cb44-568"></a>  </span>
+<span id="cb44-569"><a href="#cb44-569"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span> </span>
+<span id="cb44-570"><a href="#cb44-570"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb44-571"><a href="#cb44-571"></a>  <span class="fu">theme</span>(</span>
+<span id="cb44-572"><a href="#cb44-572"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>),  </span>
+<span id="cb44-573"><a href="#cb44-573"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span></span>
+<span id="cb44-574"><a href="#cb44-574"></a>  )</span>
+<span id="cb44-575"><a href="#cb44-575"></a><span class="in">```</span></span>
+<span id="cb44-576"><a href="#cb44-576"></a></span>
+<span id="cb44-577"><a href="#cb44-577"></a>It is not exactly the same, what's going on?</span>
+<span id="cb44-578"><a href="#cb44-578"></a></span>
+<span id="cb44-581"><a href="#cb44-581"></a><span class="in">```{r}</span></span>
+<span id="cb44-582"><a href="#cb44-582"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-583"><a href="#cb44-583"></a>?plotPCA <span class="co">#using the top 500 most variable genes</span></span>
+<span id="cb44-584"><a href="#cb44-584"></a><span class="in">```</span></span>
+<span id="cb44-585"><a href="#cb44-585"></a></span>
+<span id="cb44-586"><a href="#cb44-586"></a><span class="fu">## Make a perfect heatmap</span></span>
+<span id="cb44-587"><a href="#cb44-587"></a></span>
+<span id="cb44-590"><a href="#cb44-590"></a><span class="in">```{r}</span></span>
+<span id="cb44-591"><a href="#cb44-591"></a>significant_mat <span class="ot">&lt;-</span> normalized_vsd[significant_genes, ]</span>
+<span id="cb44-592"><a href="#cb44-592"></a><span class="fu">dim</span>(significant_mat)</span>
+<span id="cb44-593"><a href="#cb44-593"></a></span>
+<span id="cb44-594"><a href="#cb44-594"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(significant_mat))))</span>
+<span id="cb44-595"><a href="#cb44-595"></a></span>
+<span id="cb44-596"><a href="#cb44-596"></a><span class="in">```</span></span>
+<span id="cb44-597"><a href="#cb44-597"></a></span>
+<span id="cb44-598"><a href="#cb44-598"></a>You get this perfect looking heatmap because you select the genes that are different. So, no surprise at all!</span>
+<span id="cb44-599"><a href="#cb44-599"></a></span>
+<span id="cb44-602"><a href="#cb44-602"></a><span class="in">```{r}</span></span>
+<span id="cb44-603"><a href="#cb44-603"></a>metaframe</span>
+<span id="cb44-604"><a href="#cb44-604"></a></span>
+<span id="cb44-605"><a href="#cb44-605"></a>meta_annot <span class="ot">&lt;-</span> <span class="fu">HeatmapAnnotation</span>(<span class="at">df =</span> metaframe,</span>
+<span id="cb44-606"><a href="#cb44-606"></a>                                <span class="at">col =</span> <span class="fu">list</span>(<span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"hypoxia"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"normoxia"</span> <span class="ot">=</span> <span class="st">"blue"</span>)))</span>
+<span id="cb44-607"><a href="#cb44-607"></a></span>
+<span id="cb44-608"><a href="#cb44-608"></a><span class="fu">Heatmap</span>(<span class="fu">t</span>(<span class="fu">scale</span>(<span class="fu">t</span>(significant_mat))),</span>
+<span id="cb44-609"><a href="#cb44-609"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
+<span id="cb44-610"><a href="#cb44-610"></a>        <span class="at">show_row_names =</span> F,</span>
+<span id="cb44-611"><a href="#cb44-611"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb44-612"><a href="#cb44-612"></a>        )</span>
+<span id="cb44-613"><a href="#cb44-613"></a><span class="in">```</span></span>
+<span id="cb44-614"><a href="#cb44-614"></a></span>
+<span id="cb44-615"><a href="#cb44-615"></a>why scaling is important?</span>
+<span id="cb44-616"><a href="#cb44-616"></a></span>
+<span id="cb44-619"><a href="#cb44-619"></a><span class="in">```{r}</span></span>
+<span id="cb44-620"><a href="#cb44-620"></a><span class="co">#| message: false</span></span>
+<span id="cb44-621"><a href="#cb44-621"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-622"><a href="#cb44-622"></a><span class="fu">Heatmap</span>(significant_mat, </span>
+<span id="cb44-623"><a href="#cb44-623"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
+<span id="cb44-624"><a href="#cb44-624"></a>        <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb44-625"><a href="#cb44-625"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb44-626"><a href="#cb44-626"></a>        )</span>
+<span id="cb44-627"><a href="#cb44-627"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
