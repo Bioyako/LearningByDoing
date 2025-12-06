@@ -3,7 +3,7 @@ Different projects and tasks to learn by doing bioinformatics and related topics
 
 ## 🌐 Website
 You can view the rendered website here:  
-➡️ **https://biokk.github.io/LearningByDoing/**
+➡️ **https://bioyako.github.io/LearningByDoing/**
 
 ![The toolbox room](The_toolbox_room.png)
 
