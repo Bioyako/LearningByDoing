@@ -3,11 +3,7 @@ title: "ComplexHeatmap"
 subtitle: "Tutorial with Tommy"
 author: "Jaakko"
 date: "2025-11-19"
-output:
-  html_document:
-    css: rmd-support.css          # <-- Carica solo lo stile minimale
-    includes:
-      after_body: after-body.html # <-- Carica i bottoni e lo script
+output: html_document
 ---
 
 ## R Markdown
