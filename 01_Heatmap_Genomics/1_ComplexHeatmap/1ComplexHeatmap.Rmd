@@ -3,8 +3,11 @@ title: "ComplexHeatmap"
 subtitle: "Tutorial with Tommy"
 author: "Jaakko"
 date: "2025-11-19"
-output: html_document
-
+output:
+  html_document:
+    css: rmd-support.css          # <-- Carica solo lo stile minimale
+    includes:
+      after_body: after-body.html # <-- Carica i bottoni e lo script
 ---
 
 ## R Markdown
@@ -12,6 +15,7 @@ output: html_document
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 ### First time setup
+
 ```{r}
 #| echo: true
 #| eval: false
@@ -21,14 +25,16 @@ BiocManager::install("ComplexHeatmap")
 ```
 
 ### Load the library
-``` {r}
+
+```{r}
 #| message: false
 #| warning: false
 library(ComplexHeatmap)
 ```
 
 ### Make dummy data
-``` {r}
+
+```{r}
 h1 <- c(10,20,10,20,10,20,10,20,10,20)
 h2 <- c(20,10,20,10,20,10,20,10,20,10)
 
@@ -41,6 +47,7 @@ mat
 ```
 
 ### Visualize the data
+
 ```{r}
 par(mfrow = c(1,1), mar = c(4,4,1,1))
 plot(1:10, rep(0,10), ylim = c(0,35), pch = "", xlab = "Time", ylab = "Gene Expression")
@@ -53,7 +60,9 @@ legend(1,35,rownames(mat), 1:4, cex = 0.7)
 ```
 
 ### Making a heatmap is easy!
-Don't cluster the columns (auto-setting); genes are in column -> cluster false.
+
+Don't cluster the columns (auto-setting); genes are in column -\> cluster false.
+
 ```{r}
 Heatmap(mat, cluster_columns = F)
 
@@ -61,7 +70,9 @@ quantile(mat, c(0, 0.1, 0.5, 0.9))
 ```
 
 ### Change color mapping
+
 Color interpolation will be helpful.
+
 ```{r}
 col_fun <- circlize::colorRamp2(c(0, 3, 20), c("blue", "white", "red"))
 
@@ -69,7 +80,9 @@ Heatmap(mat, cluster_columns = F, col = col_fun)
 ```
 
 ### Outlier
+
 Outliers can nullify heatmaps misleading colors. Set the correct colors range-scale.
+
 ```{r}
 mat2 <- mat
 mat2[1,1] <- 1000
@@ -79,8 +92,10 @@ Heatmap(mat2, cluster_columns = F, col = col_fun)
 ```
 
 ### Scaling
-Let's scale the data/gene expression level across columns (time points) first = scale the same gene over the time.  
-N.B. scale() works on columns -> double t().
+
+Let's scale the data/gene expression level across columns (time points) first = scale the same gene over the time.\
+N.B. scale() works on columns -\> double t().
+
 ```{r}
 scaled_mat <- t(scale(t(mat)))
 
@@ -90,23 +105,25 @@ Heatmap(scaled_mat, cluster_columns = F)
 
 ```
 
-Note - after scaling, h1 and l1, as h2 and l2, are close each other!  
+Note - after scaling, h1 and l1, as h2 and l2, are close each other!
 
 ### Understanding clustering?
-In order to understand heatmap you need to understand clustering.  
-In order to cluster different rows or different columns together you first have to define distance between the rows or the columns -> dist() = distance matrix (euclidian distance) = pair-wise  [2D plane d=sqrt{(x2-x1)^2 + (y2-y1)^2} ]. 
 
-| |c1|c2|c3| 
+In order to understand heatmap you need to understand clustering.\
+In order to cluster different rows or different columns together you first have to define distance between the rows or the columns -\> dist() = distance matrix (euclidian distance) = pair-wise [2D plane d=sqrt{(x2-x1)\^2 + (y2-y1)\^2} ].
+
+|     | c1  | c2  | c3  |
 |:---:|:---:|:---:|:---:|
-|r1|x| | |  
-|r2|x|x| |  
-|r3|x|x|x|  
+| r1  |  x  |     |     |
+| r2  |  x  |  x  |     |
+| r3  |  x  |  x  |  x  |
 
-N.B. There are different distance methods used in different scenarios.  
-Then you do the clustering.  
-N.B. Different methods of hierarchical clustering.  
+N.B. There are different distance methods used in different scenarios.\
+Then you do the clustering.\
+N.B. Different methods of hierarchical clustering.
 
-A) define distance
+A)  define distance
+
 ```{r}
 ?dist
 
@@ -114,7 +131,8 @@ d <- dist(mat)
 d
 ```
 
-B) do clustering and plot
+B)  do clustering and plot
+
 ```{r}
 ?hclust
 
@@ -124,6 +142,7 @@ plot(hclust(d))
 ```
 
 Look after scaling.
+
 ```{r}
 d2 <- dist(scaled_mat)
 
@@ -131,11 +150,10 @@ plot(hclust(d2))
 ```
 
 ### Take home message
-1. Color mapping is critical
-2. Scaling is critical
-3. Making heatmap is easy, but better to understand the details
 
-
+1.  Color mapping is critical
+2.  Scaling is critical
+3.  Making heatmap is easy, but better to understand the details
 
 ```{r}
 ?Heatmap

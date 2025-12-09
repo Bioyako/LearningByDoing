@@ -1,0 +1,25 @@
+/* rmd-support.css - Solo per far funzionare i bottoni e la sidebar in Rmd */
+
+/* 1. Nascondere la sidebar quando chiusa */
+html.sidebar-closed #quarto-sidebar {
+  display: none !important; /* Metodo semplice per Rmd */
+}
+
+html.sidebar-closed .main-container {
+  margin-left: 0 !important;
+  width: 95% !important;
+  max-width: 100% !important;
+}
+
+/* 2. Supporto Dark Mode (Opzionale per Rmd) */
+/* Se vuoi che il bottone faccia qualcosa su Rmd, definisci qui solo lo sfondo */
+html.dark-mode body {
+  background-color: #1e2433 !important;
+  color: #d4d4d4 !important;
+}
+/* Invertiamo i colori dei box standard di Rmd in dark mode */
+html.dark-mode pre {
+  background-color: #2d3648 !important;
+  border: 1px solid #3d4758 !important;
+  color: #d4d4d4 !important;
+}

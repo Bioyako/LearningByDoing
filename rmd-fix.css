@@ -1,0 +1,36 @@
+/* rmd-fix.css
+   piccole regole per ripristinare uno sfondo chiaro e colori leggibili
+   su pagine che vuoi esclusivamente in stile "Rmd default" */
+body {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+}
+
+/* codice: sfondo chiaro e testo scuro */
+div.sourceCode, pre, code, .sourceCode {
+  background: #f8f8f8 !important;
+  color: #111111 !important;
+  border-color: #e0e0e0 !important;
+}
+
+/* output console */
+div.cell-output-stdout pre,
+div.cell-output-stderr pre {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+/* bottone copia (chiaro) */
+.code-copy-button {
+  background-color: #e8e8e8 !important;
+  color: #111111 !important;
+  border: 1px solid #d0d0d0 !important;
+}
+
+/* override eventuali colori di sintassi (minimo) */
+.sourceCode .kw, .sourceCode .st, .sourceCode .co,
+.sourceCode .dv, .sourceCode .fu {
+  color: inherit !important;
+}
+
