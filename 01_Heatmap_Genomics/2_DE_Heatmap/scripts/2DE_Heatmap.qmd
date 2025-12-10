@@ -65,7 +65,7 @@ Check the data in the compressed RNA-seq file.
 #| eval: false
 zless -S GSE197576_raw_gene_counts_matrix.tsv.gz
 # z because is compressed
-# less is the faster command to view the conte of a file
+# less is the faster command to view the content of a file
 # -S maintain one raw column
 # press q to quit
 ```
@@ -130,7 +130,8 @@ mamba install -c conda-forge r-here
 mamba install -c bioconda bioconductor-deseq2
 mamba intall -c conda-forge r-ggplot2
 mamba install -c conda-forge r-ggrepel
-mamba install -c conda-forge r-BiocManager   
+mamba install -c conda-forge r-BiocManager
+mamba install -c bioconda bioconductor-complexheatmap
 ```
 
 Save the environment for reproducibility.
@@ -158,7 +159,6 @@ library(here) #https://cran.r-project.org/web/packages/here/vignettes/here.html
 library(DESeq2) #https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8
 library(ggplot2)
 library(ggrepel)
-BiocManager::install("ComplexHeatmap")
 library(ComplexHeatmap)
 
 raw_counts <- read_tsv(here("01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv")) #import the dataset
@@ -308,6 +308,6 @@ why scaling is important?
 Heatmap(significant_mat, 
         top_annotation = meta_annot,
         show_row_names = FALSE,
-        name = "scaled normalized\nexpression"
+        name = "NOT scaled normalized\nexpression"
         )
 ```
