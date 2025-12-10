@@ -1,0 +1,185 @@
+/* ============================ */
+/* BASE THEMES           */
+/* ============================ */
+
+/* --- BACKGROUND FIX --- */
+/* Applichiamo lo sfondo a tutti i container principali per evitare spazi bianchi */
+:root.dark-mode,
+:root.dark-mode body,
+:root.dark-mode .quarto-container,
+:root.dark-mode .page-columns {
+  background-color: #1e2433 !important;
+  color: #d4d4d4 !important;
+}
+
+/* LIGHT MODE */
+:root.light-mode body {
+  background-color: #e8eef5 !important;
+  color: #2c3e50 !important;
+}
+
+/* ============================ */
+/* SIDEBAR TOGGLE LOGIC      */
+/* ============================ */
+
+/* Transizione fluida */
+#quarto-sidebar, .quarto-sidebar, .quarto-page, .page-columns {
+  transition: all 0.3s ease;
+}
+
+/* Quando la sidebar è CHIUSA */
+:root.sidebar-closed #quarto-sidebar,
+:root.sidebar-closed .quarto-sidebar {
+  transform: translateX(-350px) !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Espandi il contenuto principale per occupare tutto lo spazio */
+:root.sidebar-closed .quarto-page,
+:root.sidebar-closed .quarto-content {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 2rem !important; /* Un po' di respiro a sinistra */
+}
+
+/* ============================ */
+/* STILI CODICE (Invariati)  */
+/* ============================ */
+
+/* --- 2. CONTENITORE ESTERNO --- */
+div.sourceCode {
+  background: linear-gradient(90deg, #232b3a 0%, #232b3a 50px, #2d3648 50px, #2d3648 100%) !important;
+  border: 1px solid #3d4758;
+  border-radius: 6px;
+  margin-bottom: 1em;
+  position: relative;
+  padding-top: 34px !important;
+}
+
+/* --- 3. PRE --- */
+div.sourceCode pre {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* --- 4. NUMERI DI RIGA --- */
+div.sourceCode pre code a,
+div.sourceCode pre code span.a,
+div.sourceCode .linenos {
+  color: #636d83 !important;
+  text-decoration: none;
+  opacity: 1 !important;
+}
+
+/* --- 5. HEADER LINGUAGGIO --- */
+div.sourceCode::before {
+  content: "CODE";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 34px;
+  background-color: #232b3a;
+  border-bottom: 1px solid #3d4758;
+  color: #7d899c;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  z-index: 10;
+}
+
+/* Etichette specifiche */
+div.sourceCode:has(.r)::before, div.sourceCode:has(.language-r)::before { content: "R"; }
+div.sourceCode:has(.bash)::before, div.sourceCode:has(.language-bash)::before { content: "BASH"; }
+div.sourceCode:has(.python)::before, div.sourceCode:has(.language-python)::before { content: "PYTHON"; }
+div.sourceCode:has(.css)::before, div.sourceCode:has(.language-css)::before { content: "CSS"; }
+div.sourceCode:has(.json)::before, div.sourceCode:has(.language-json)::before { content: "JSON"; }
+
+/* --- 6. OUTPUT --- */
+div.cell-output-stdout pre,
+div.cell-output-stderr pre {
+  background-color: #2d3648 !important;
+  border: 1px solid #3d4758;
+  border-radius: 6px;
+  padding: 0.8em 1em !important;
+}
+div.cell-output-stdout pre, div.cell-output-stdout pre code,
+div.cell-output-stderr pre, div.cell-output-stderr pre code {
+  color: #ff8866 !important;
+}
+
+/* --- 7. BOTTONE COPIA --- */
+.code-copy-button {
+  position: absolute !important;
+  top: 6px !important;
+  right: 6px !important;
+  z-index: 100 !important;
+  background-color: #3d4758 !important;
+  color: #d4d4d4 !important;
+  border: 1px solid #4d5768 !important;
+}
+.code-copy-button:hover {
+  background-color: #4d5768 !important;
+}
+
+/* --- 8. SYNTAX HIGHLIGHTING (DARK) --- */
+:root.dark-mode .sourceCode .kw { color: #ff79c6 !important; }
+:root.dark-mode .sourceCode .dt { color: #8be9fd !important; }
+:root.dark-mode .sourceCode .dv { color: #bd93f9 !important; }
+:root.dark-mode .sourceCode .st { color: #f1fa8c !important; }
+:root.dark-mode .sourceCode .co { color: #6272a4 !important; }
+:root.dark-mode .sourceCode .fu { color: #50fa7b !important; }
+:root.dark-mode .sourceCode .op { color: #ff79c6 !important; }
+:root.dark-mode .sourceCode .va { color: #f8f8f2 !important; }
+:root.dark-mode .sourceCode .at { color: #50fa7b !important; }
+:root.dark-mode .sourceCode .ss { color: #f1fa8c !important; }
+
+/* ============================ */
+/* LIGHT MODE OVERRIDES     */
+/* ============================ */
+:root.light-mode div.sourceCode {
+  background: linear-gradient(90deg, #d7d7e0 0%, #d7d7e0 50px, #ffffff 50px, #ffffff 100%) !important;
+  border-color: #bfc6d1 !important;
+}
+:root.light-mode div.sourceCode pre *,
+:root.light-mode div.sourceCode pre code *,
+:root.light-mode div.sourceCode span {
+  color: #383a42 !important;
+}
+:root.light-mode .linenos,
+:root.light-mode div.sourceCode pre code a {
+  color: #6b7280 !important;
+}
+:root.light-mode div.sourceCode::before {
+  background-color: #d7d7e0 !important;
+  color: #555 !important;
+  border-bottom: 1px solid #bfc6d1 !important;
+}
+:root.light-mode div.cell-output-stdout pre,
+:root.light-mode div.cell-output-stderr pre {
+  background-color: #ffffff !important;
+  border: 1px solid #bfc6d1 !important;
+}
+:root.light-mode div.cell-output-stdout pre code,
+:root.light-mode div.cell-output-stderr pre code {
+  color: #a83200 !important;
+}
+:root.light-mode .code-copy-button {
+  background-color: #d7d7e0 !important;
+  color: #383a42 !important;
+  border: 1px solid #bfc6d1 !important;
+}
+/* Light Syntax */
+:root.light-mode .sourceCode .kw { color: #a626a4 !important; }
+:root.light-mode .sourceCode .dt { color: #0184bc !important; }
+:root.light-mode .sourceCode .dv { color: #986801 !important; }
+:root.light-mode .sourceCode .st { color: #50a14f !important; }
+:root.light-mode .sourceCode .co { color: #a0a1a7 !important; }
+:root.light-mode .sourceCode .fu { color: #4078f2 !important; }
