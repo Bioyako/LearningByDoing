@@ -1,6 +1,5 @@
 # LearningByDoing
-Different projects and tasks to learn by doing bioinformatics and related topics. Resources from online tutorials and teachers  
-
+Different projects and tasks to learn by doing Bioinformatic and Computational biology topics. Resources from online tutorials and teachers
 ## 🌐 Website
 You can view the rendered website here:  
 ➡️ **https://bioyako.github.io/LearningByDoing/**
