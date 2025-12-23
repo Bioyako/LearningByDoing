@@ -255,7 +255,7 @@ N.B. - Learn the IT foundations to master bioinformatics tools and softwares, an
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">zless</span> <span class="at">-S</span> GSE197576_raw_gene_counts_matrix.tsv.gz</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co"># z because is compressed</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># less is the faster command to view the conte of a file</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># less is the faster command to view the content of a file</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># -S maintain one raw column</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co"># press q to quit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -344,7 +344,8 @@ LOC729737                  3                  3                  33             
 <span id="cb13-4"><a href="#cb13-4"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-deseq2</span>
 <span id="cb13-5"><a href="#cb13-5"></a><span class="ex">mamba</span> intall <span class="at">-c</span> conda-forge r-ggplot2</span>
 <span id="cb13-6"><a href="#cb13-6"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-ggrepel</span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager   </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-complexheatmap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Save the environment for reproducibility.</p>
 <div class="cell">
@@ -364,13 +365,12 @@ LOC729737                  3                  3                  33             
 <span id="cb16-4"><a href="#cb16-4"></a><span class="fu">library</span>(DESeq2) <span class="co">#https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</span></span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb16-6"><a href="#cb16-6"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb16-7"><a href="#cb16-7"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ComplexHeatmap"</span>)</span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="fu">library</span>(ComplexHeatmap)</span>
-<span id="cb16-9"><a href="#cb16-9"></a></span>
-<span id="cb16-10"><a href="#cb16-10"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">here</span>(<span class="st">"01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv"</span>)) <span class="co">#import the dataset</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a></span>
-<span id="cb16-12"><a href="#cb16-12"></a>raw_counts_mat <span class="ot">&lt;-</span> raw_counts[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> as.matrix <span class="co">#create the values matrix removing the first column for DESeq2</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a><span class="fu">head</span>(raw_counts_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">here</span>(<span class="st">"01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv"</span>)) <span class="co">#import the dataset</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a></span>
+<span id="cb16-11"><a href="#cb16-11"></a>raw_counts_mat <span class="ot">&lt;-</span> raw_counts[, <span class="sc">-</span><span class="dv">1</span>] <span class="sc">%&gt;%</span> as.matrix <span class="co">#create the values matrix removing the first column for DESeq2</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="fu">head</span>(raw_counts_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     01_SW_sgCTRL_Norm 02_SW_sgCTRL_Norm 17_SW_sgRELB_3_Hyp 18_SW_sgRELB_3_Hyp
 [1,]                 0                 0                  0                  0
@@ -600,7 +600,7 @@ MIR6859-1           10.39306</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">Heatmap</span>(significant_mat, </span>
 <span id="cb43-2"><a href="#cb43-2"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
 <span id="cb43-3"><a href="#cb43-3"></a>        <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb43-4"><a href="#cb43-4"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>        <span class="at">name =</span> <span class="st">"NOT scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
 <span id="cb43-5"><a href="#cb43-5"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -777,7 +777,7 @@ MIR6859-1           10.39306</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Bioyako\.github\.io\/LearningByDoing\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1171,7 +1171,7 @@ MIR6859-1           10.39306</code></pre>
 <span id="cb44-73"><a href="#cb44-73"></a><span class="co">#| eval: false</span></span>
 <span id="cb44-74"><a href="#cb44-74"></a><span class="fu">zless</span> <span class="at">-S</span> GSE197576_raw_gene_counts_matrix.tsv.gz</span>
 <span id="cb44-75"><a href="#cb44-75"></a><span class="co"># z because is compressed</span></span>
-<span id="cb44-76"><a href="#cb44-76"></a><span class="co"># less is the faster command to view the conte of a file</span></span>
+<span id="cb44-76"><a href="#cb44-76"></a><span class="co"># less is the faster command to view the content of a file</span></span>
 <span id="cb44-77"><a href="#cb44-77"></a><span class="co"># -S maintain one raw column</span></span>
 <span id="cb44-78"><a href="#cb44-78"></a><span class="co"># press q to quit</span></span>
 <span id="cb44-79"><a href="#cb44-79"></a><span class="in">```</span></span>
@@ -1236,35 +1236,35 @@ MIR6859-1           10.39306</code></pre>
 <span id="cb44-152"><a href="#cb44-152"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-deseq2</span>
 <span id="cb44-153"><a href="#cb44-153"></a><span class="ex">mamba</span> intall <span class="at">-c</span> conda-forge r-ggplot2</span>
 <span id="cb44-154"><a href="#cb44-154"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-ggrepel</span>
-<span id="cb44-155"><a href="#cb44-155"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager   </span>
-<span id="cb44-156"><a href="#cb44-156"></a><span class="in">```</span></span>
-<span id="cb44-157"><a href="#cb44-157"></a></span>
-<span id="cb44-158"><a href="#cb44-158"></a>Save the environment for reproducibility.</span>
-<span id="cb44-159"><a href="#cb44-159"></a></span>
-<span id="cb44-162"><a href="#cb44-162"></a><span class="in">```{bash}</span></span>
-<span id="cb44-163"><a href="#cb44-163"></a><span class="co">#| eval: false</span></span>
-<span id="cb44-164"><a href="#cb44-164"></a><span class="ex">mamba</span> env export <span class="at">--no-builds</span> <span class="op">&gt;</span> bioinfo_environment.yml</span>
-<span id="cb44-165"><a href="#cb44-165"></a><span class="in">```</span></span>
-<span id="cb44-166"><a href="#cb44-166"></a></span>
-<span id="cb44-167"><a href="#cb44-167"></a>Open RStudio from the terminal: you are now working with the R software within 'bioinfo' and you can find the packages previously installed.</span>
-<span id="cb44-168"><a href="#cb44-168"></a></span>
-<span id="cb44-171"><a href="#cb44-171"></a><span class="in">```{bash}</span></span>
-<span id="cb44-172"><a href="#cb44-172"></a><span class="co">#| eval: false</span></span>
-<span id="cb44-173"><a href="#cb44-173"></a><span class="ex">open</span> <span class="at">-na</span> RStudio</span>
-<span id="cb44-174"><a href="#cb44-174"></a><span class="in">```</span></span>
-<span id="cb44-175"><a href="#cb44-175"></a></span>
-<span id="cb44-176"><a href="#cb44-176"></a><span class="fu">### Let’s start</span></span>
-<span id="cb44-177"><a href="#cb44-177"></a></span>
-<span id="cb44-180"><a href="#cb44-180"></a><span class="in">```{r}</span></span>
-<span id="cb44-181"><a href="#cb44-181"></a><span class="co">#| message: false</span></span>
-<span id="cb44-182"><a href="#cb44-182"></a><span class="co">#| warning: false</span></span>
-<span id="cb44-183"><a href="#cb44-183"></a><span class="fu">library</span>(dplyr) <span class="co">#https://dplyr.tidyverse.org/</span></span>
-<span id="cb44-184"><a href="#cb44-184"></a><span class="fu">library</span>(readr) <span class="co">#https://readr.tidyverse.org/</span></span>
-<span id="cb44-185"><a href="#cb44-185"></a><span class="fu">library</span>(here) <span class="co">#https://cran.r-project.org/web/packages/here/vignettes/here.html</span></span>
-<span id="cb44-186"><a href="#cb44-186"></a><span class="fu">library</span>(DESeq2) <span class="co">#https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</span></span>
-<span id="cb44-187"><a href="#cb44-187"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb44-188"><a href="#cb44-188"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb44-189"><a href="#cb44-189"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"ComplexHeatmap"</span>)</span>
+<span id="cb44-155"><a href="#cb44-155"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge r-BiocManager</span>
+<span id="cb44-156"><a href="#cb44-156"></a><span class="ex">mamba</span> install <span class="at">-c</span> bioconda bioconductor-complexheatmap</span>
+<span id="cb44-157"><a href="#cb44-157"></a><span class="in">```</span></span>
+<span id="cb44-158"><a href="#cb44-158"></a></span>
+<span id="cb44-159"><a href="#cb44-159"></a>Save the environment for reproducibility.</span>
+<span id="cb44-160"><a href="#cb44-160"></a></span>
+<span id="cb44-163"><a href="#cb44-163"></a><span class="in">```{bash}</span></span>
+<span id="cb44-164"><a href="#cb44-164"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-165"><a href="#cb44-165"></a><span class="ex">mamba</span> env export <span class="at">--no-builds</span> <span class="op">&gt;</span> bioinfo_environment.yml</span>
+<span id="cb44-166"><a href="#cb44-166"></a><span class="in">```</span></span>
+<span id="cb44-167"><a href="#cb44-167"></a></span>
+<span id="cb44-168"><a href="#cb44-168"></a>Open RStudio from the terminal: you are now working with the R software within 'bioinfo' and you can find the packages previously installed.</span>
+<span id="cb44-169"><a href="#cb44-169"></a></span>
+<span id="cb44-172"><a href="#cb44-172"></a><span class="in">```{bash}</span></span>
+<span id="cb44-173"><a href="#cb44-173"></a><span class="co">#| eval: false</span></span>
+<span id="cb44-174"><a href="#cb44-174"></a><span class="ex">open</span> <span class="at">-na</span> RStudio</span>
+<span id="cb44-175"><a href="#cb44-175"></a><span class="in">```</span></span>
+<span id="cb44-176"><a href="#cb44-176"></a></span>
+<span id="cb44-177"><a href="#cb44-177"></a><span class="fu">### Let’s start</span></span>
+<span id="cb44-178"><a href="#cb44-178"></a></span>
+<span id="cb44-181"><a href="#cb44-181"></a><span class="in">```{r}</span></span>
+<span id="cb44-182"><a href="#cb44-182"></a><span class="co">#| message: false</span></span>
+<span id="cb44-183"><a href="#cb44-183"></a><span class="co">#| warning: false</span></span>
+<span id="cb44-184"><a href="#cb44-184"></a><span class="fu">library</span>(dplyr) <span class="co">#https://dplyr.tidyverse.org/</span></span>
+<span id="cb44-185"><a href="#cb44-185"></a><span class="fu">library</span>(readr) <span class="co">#https://readr.tidyverse.org/</span></span>
+<span id="cb44-186"><a href="#cb44-186"></a><span class="fu">library</span>(here) <span class="co">#https://cran.r-project.org/web/packages/here/vignettes/here.html</span></span>
+<span id="cb44-187"><a href="#cb44-187"></a><span class="fu">library</span>(DESeq2) <span class="co">#https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8</span></span>
+<span id="cb44-188"><a href="#cb44-188"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-189"><a href="#cb44-189"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb44-190"><a href="#cb44-190"></a><span class="fu">library</span>(ComplexHeatmap)</span>
 <span id="cb44-191"><a href="#cb44-191"></a></span>
 <span id="cb44-192"><a href="#cb44-192"></a>raw_counts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="fu">here</span>(<span class="st">"01_Heatmap_Genomics/2_DE_Heatmap/data/raw.counts.tsv"</span>)) <span class="co">#import the dataset</span></span>
@@ -1414,7 +1414,7 @@ MIR6859-1           10.39306</code></pre>
 <span id="cb44-352"><a href="#cb44-352"></a><span class="fu">Heatmap</span>(significant_mat, </span>
 <span id="cb44-353"><a href="#cb44-353"></a>        <span class="at">top_annotation =</span> meta_annot,</span>
 <span id="cb44-354"><a href="#cb44-354"></a>        <span class="at">show_row_names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb44-355"><a href="#cb44-355"></a>        <span class="at">name =</span> <span class="st">"scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
+<span id="cb44-355"><a href="#cb44-355"></a>        <span class="at">name =</span> <span class="st">"NOT scaled normalized</span><span class="sc">\n</span><span class="st">expression"</span></span>
 <span id="cb44-356"><a href="#cb44-356"></a>        )</span>
 <span id="cb44-357"><a href="#cb44-357"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>

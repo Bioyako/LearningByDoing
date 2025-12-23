@@ -1,0 +1,96 @@
+# 
+
+---
+title: "Notes"
+author: "Jaakko"
+date: "2025-12-23"
+format:
+  html:
+    css: /styles.css
+    code-copy: true 
+    code-line-numbers: true
+    code-overflow: scroll
+    code-tools: true
+    highlight-style: github-dark
+engine: knitr
+execute:
+  echo: true
+  eval: true
+conda:
+  environment: bioinfo #bioinfo_environment.yml
+---
+
+# Notes from scratch to advanced level
+
+<https://gettinggeneticsdone.blogspot.com/>
+
+<https://blog.stephenturner.us/t/r>
+
+<https://divingintogeneticsandgenomics.com/>
+
+## Computational biology starter pack:
+
+-   **Unix** command line to:
+
+    -   wrangle the "king" file format of bioinformatics = file.txt
+    -   run bioinformatics tools
+    -   execute a single efficient and powerful command (1 line vs 10 clicks)
+    -   manage the system settings - GUI interface not always presents
+
+-   **R**
+
+    -   Rstudio (IDE)
+
+    -   Bioconductor: open source software for precise and repeatable analysis of biological data.
+
+    -   Tydiverse and ggplot2
+
+        ![](Tidy.png)
+
+        -   Tyding data = process of restructuring datasets into a standardized format
+
+-   Python
+
+-   Help?
+
+    -   SeqAnswer
+    -   Biostars
+    -   Stack Overflow
+    -   Bioconductor help
+
+-   Ensure [Reproducibility]{.underline}
+
+    -   **Git** - version control
+    -   Jupyter/R Notebook (MkDocs)/**Quarto** - documentation
+    -   Docker/Singularity/Biocontainers - containers for computer environments
+    -   **GitHub**/GitLab - integration and development
+    -   Automation helps
+    -   Consistent folder structure
+
+    ![](table1.png)
+
+-   Implement automation
+
+    -   shell script
+    -   Snakemake/Nextflow/WDL
+    -   Docker/Conda and Bioonda
+
+-   Learn by doing - Learn by teaching
+
+## How to make a Heatmap
+
+Heatmap: color intensity = magnitude of a phenomenon
+
+-   ComplexHeatmap() - R
+
+    -   Expression data -\> DE -\> PCA -\> Heatmap
+
+    -   Color mapping is critical (Outliers alert)
+
+    -   Scaling is critical
+
+    -   Understand the details
+
+        -   Distance methods -\> Clustering -\> Heamap
+
+<https://gettinggeneticsdone.blogspot.com/2017/02/staying-current-in-bioinformatics-genomics-2017.html>
