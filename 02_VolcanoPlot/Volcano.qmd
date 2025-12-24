@@ -1,0 +1,49 @@
+---
+title: "1_VolcanoPlot"
+author: "Jaakko"
+date: "2025-11-20"
+format:
+  html:
+    css: /styles.css
+    code-copy: true 
+    code-line-numbers: true
+    code-overflow: scroll
+    code-tools: true
+    highlight-style: github-dark
+engine: knitr
+execute:
+  echo: true
+  eval: true
+conda:
+  environment: bioinfo #bioinfo_environment.yml
+---
+
+## Download the RNA-seq dataset
+
+Let's use a real example - [*RNA-seq of ITPR3 and RELB knockout in SW480 under normoxia and hypoxia*]{.underline} (*Homo sapiens*) <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197576>.
+
+How to download the files from FTP with UNIX terminal: <https://www.ncbi.nlm.nih.gov/geo/info/download.html>\
+<https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/>
+
+```{bash}
+#| eval: false
+mkdir data
+cd data
+wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/GSE197576_raw_gene_counts_matrix.tsv.gz
+
+```
+
+Alternative use GEOquery <https://bioconductor.org/packages/release/bioc/html/GEOquery.html>.
+
+## Check the data ad extract the samples of interest
+
+Check the data in the compressed RNA-seq file.
+
+```{bash}
+#| eval: false
+zless -S GSE197576_raw_gene_counts_matrix.tsv.gz
+# z because is compressed
+# less is the faster command to view the content of a file
+# -S maintain one raw column
+# press q to quit
+```
