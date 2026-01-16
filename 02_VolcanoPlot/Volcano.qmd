@@ -18,32 +18,38 @@ conda:
   environment: bioinfo #bioinfo_environment.yml
 ---
 
+## Quarto
+
+This is a Quarto document. Quarto is a multi-language, next-generation version of R Markdown. Check the [tutorial](https://quarto.org/docs/get-started/hello/rstudio.html).\
+N.B. - Learn the IT foundations to master bioinformatics tools and softwares, and prevent getting tangled on the infamous "dependency hell". Ask for the "Foundations of Bioinformatics Infrastructure".
+
+**---------- DATA GENERATION (check "Data generation for plotting"**
+
 ## Download the RNA-seq dataset
 
 Let's use a real example - [*RNA-seq of ITPR3 and RELB knockout in SW480 under normoxia and hypoxia*]{.underline} (*Homo sapiens*) <https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197576>.
 
-How to download the files from FTP with UNIX terminal: <https://www.ncbi.nlm.nih.gov/geo/info/download.html>\
-<https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/>
-
-```{bash}
-#| eval: false
-mkdir data
-cd data
-wget https://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197576/suppl/GSE197576_raw_gene_counts_matrix.tsv.gz
-
-```
-
-Alternative use GEOquery <https://bioconductor.org/packages/release/bioc/html/GEOquery.html>.
-
 ## Check the data ad extract the samples of interest
 
-Check the data in the compressed RNA-seq file.
+## Read the data into R and make a DESeq2 object
 
-```{bash}
-#| eval: false
-zless -S GSE197576_raw_gene_counts_matrix.tsv.gz
-# z because is compressed
-# less is the faster command to view the content of a file
-# -S maintain one raw column
-# press q to quit
+### PCA Analysis to verify your results
+
+**---------- PLOT**
+
+## Make a perfect Volcano plot
+
+What is a volcano plot? It's a SCATTER PLOT:
+
+-   x-axis = log2FoldChange
+
+-   y-axis = -log10(p-values)
+
+```{r}
+res %>%
+  as.data.frame() %>%
+  ggplot(aes(x = log2FoldChange, y = log10(pvalue))) +
+  geom_point()
 ```
+
+What are the points on the top?

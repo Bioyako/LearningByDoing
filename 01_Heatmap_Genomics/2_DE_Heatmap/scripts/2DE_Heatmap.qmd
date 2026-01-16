@@ -94,7 +94,7 @@ N.B - Get csvtk at <https://github.com/shenwei356/csvtk>
 Extract the gene expression values from:
 
 |  |  |  |  |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | *01_SW_sgCTRL_Norm* | *02_SW_sgCTRL_Norm* | *17_SW_sgRELB_3_Hyp* | *18_SW_sgRELB_3_Hyp* |
 
 ```{bash}
